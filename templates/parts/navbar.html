@@ -1,0 +1,400 @@
+<!-- Navbar (Div 1) -->
+<nav class="navbar">
+    <div class="nav-container">
+        <div class="nav-logo">
+            <a href="{% url 'home' %}"><i class="fas fa-spa"></i> <span class="text-lotus">Lotus</span></a>
+        </div>
+        <div class="nav-menu" id="nav-menu">
+            <a href="{% url 'products' %}" class="nav-link text-nav-products">Products</a>
+            <a href="#services" class="nav-link text-nav-services">Services</a>
+            <div class="nav-link dropdown">
+                <span class="text-nav-company">Company <i class="fas fa-chevron-down"></i></span>
+                <div class="dropdown-content">
+                    <a href="#about" class="text-nav-about">About</a>
+                    <a href="#contact" class="text-nav-contact">Contact</a>
+                    <a href="#team" class="text-nav-team">Executive Team</a>
+                    <a href="#news" class="text-nav-news">Newsroom</a>
+                    <a href="#careers" class="text-nav-careers">Careers</a>
+                </div>
+            </div>
+            <a href="#industries" class="nav-link text-nav-industries">Industries</a>
+            <a href="#resources" class="nav-link text-nav-resources">Resources</a>
+            <a href="#custom" class="nav-link text-nav-design">Design Your Tool</a>
+        </div>
+        <div class="nav-buttons">
+            <button id="language-toggle" class="lang-btn">العربية</button>
+            
+            {% if user.is_authenticated %}
+            <div class="nav-user">
+                <button class="nav-user-btn">
+                    <div class="nav-user-avatar">
+                        {% if user.profile.avatar %}
+                            <img src="{{ user.profile.avatar.url }}" alt="{{ user.get_full_name }}">
+                        {% else %}
+                            <i class="fas fa-user"></i>
+                        {% endif %}
+                    </div>
+
+                    <span class="nav-user-name">{{ user.first_name|default:user.username }}</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+
+                <div class="nav-user-dropdown">
+                    <a href="{% url 'profile' %}">
+                        <i class="fas fa-user"></i> My Profile
+                    </a>
+                    <a href="{% url 'dashboard' %}">
+                        <i class="fas fa-chart-bar"></i> Dashboard
+                    </a>
+                    <a href="{% url 'my_projects' %}">
+                        <i class="fas fa-project-diagram"></i> My Projects
+                    </a>
+
+                    <div class="divider"></div>
+
+                    <a href="{% url 'home' %}" class="logout">
+                        <i class="fas fa-sign-out-alt"></i> Sign Out
+                    </a>
+                </div>
+            </div>
+            {% else %}
+            <a href="{% url 'login' %}" class="nav-auth-btn login-btn">Sign In</a>
+            <a href="{% url 'signup' %}" class="nav-auth-btn signup-btn">Sign Up</a>
+            {% endif %}
+
+            
+            <button class="buy-btn text-nav-buy">Buy</button>
+            <button class="demo-btn text-nav-demo">Request a Demo</button>
+            <div class="search-icon" id="search-toggle">
+                <i class="fas fa-search"></i>
+            </div>
+        </div>
+        <div class="hamburger" id="hamburger">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </div>
+    </div>
+</nav>
+
+<!-- Search Modal -->
+<div id="search-modal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form class="search-form">
+            <input type="text" placeholder="Search research, analysis, tools..." name="search" class="text-search-placeholder">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</div>
+
+<style>
+/* Add these styles to your existing CSS */
+
+.nav-auth-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.login-btn {
+    color: var(--primary);
+    border: 1px solid var(--primary);
+    background: transparent;
+}
+
+.login-btn:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.signup-btn {
+    background: var(--accent);
+    color: white;
+    border: 1px solid var(--accent);
+}
+
+.signup-btn:hover {
+    background: #1f8c8f;
+    border-color: #1f8c8f;
+}
+
+.user-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem;
+    background: transparent;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.user-menu:hover {
+    border-color: var(--accent);
+}
+
+.user-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 0.8rem;
+}
+
+.user-avatar img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.user-name {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+.user-dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 100%;
+    background: white;
+    min-width: 200px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 8px;
+    padding: 0.5rem;
+    z-index: 1000;
+    margin-top: 0.5rem;
+}
+
+.user-dropdown:hover .user-dropdown-content {
+    display: block;
+}
+
+.dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    color: #333;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.dropdown-item:hover {
+    background: #f8f9fa;
+    color: var(--primary);
+}
+
+.dropdown-item.logout {
+    color: #d32f2f;
+}
+
+.dropdown-item.logout:hover {
+    background: #ffeaea;
+}
+
+.dropdown-divider {
+    height: 1px;
+    background: #eee;
+    margin: 0.5rem 0;
+}
+
+/* RTL Support */
+body.rtl .user-dropdown-content {
+    right: auto;
+    left: 0;
+}
+
+body.rtl .user-menu {
+    flex-direction: row-reverse;
+}
+
+body.rtl .dropdown-item {
+    flex-direction: row-reverse;
+}
+
+@media (max-width: 768px) {
+    .nav-auth-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
+    .user-name {
+        display: none;
+    }
+}
+{% comment %} {% endcomment %}
+/* -----------------------------------------------------------
+   USER NAV STYLE — Matches Lotus Navbar
+------------------------------------------------------------ */
+
+.nav-user {
+    position: relative;
+}
+
+.nav-user-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.45rem;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 0.4rem 0.7rem;
+    border-radius: 6px;
+    transition: 0.25s ease;
+}
+
+.nav-user-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+.nav-user-avatar {
+    width: 32px;
+    height: 32px;
+    background: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    overflow: hidden;
+    font-size: 0.8rem;
+}
+
+.nav-user-avatar img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nav-user-name {
+    font-weight: 600;
+    color: var(--primary);
+    font-size: 0.9rem;
+}
+
+/* Dropdown */
+
+.nav-user-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 110%;
+    background: #fff;
+    min-width: 220px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+    border-radius: 10px;
+    padding: 0.6rem 0;
+    z-index: 1000;
+    animation: fadeIn 0.15s ease;
+}
+
+.nav-user:hover .nav-user-dropdown {
+    display: block;
+}
+
+.nav-user-dropdown a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    color: #333;
+    padding: 0.75rem 1rem;
+    text-decoration: none;
+    font-size: 0.92rem;
+    transition: 0.2s ease;
+}
+
+.nav-user-dropdown a:hover {
+    background: #f4f7ff;
+    color: var(--primary);
+}
+
+.nav-user-dropdown a.logout {
+    color: #d32f2f;
+}
+
+.nav-user-dropdown a.logout:hover {
+    background: #ffecec;
+}
+
+.nav-user-dropdown .divider {
+    height: 1px;
+    background: #eee;
+    margin: 0.4rem 0;
+}
+
+/* RTL Support */
+body.rtl .nav-user-dropdown {
+    right: auto;
+    left: 0;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+    .nav-user-name { display: none; }
+}
+
+/* Highlight the dropdown box when visible */
+.nav-user:hover .nav-user-dropdown {
+    display: block;
+    border: 2px solid var(--primary); /* Adds colored border */
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow */
+    background: #fff; /* Ensure background stays white */
+}
+
+</style>
+
+<script>
+// Add user dropdown functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const userDropdowns = document.querySelectorAll('.user-dropdown');
+    
+    userDropdowns.forEach(dropdown => {
+        dropdown.addEventListener('click', function(e) {
+            e.stopPropagation();
+        });
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function() {
+        userDropdowns.forEach(dropdown => {
+            const content = dropdown.querySelector('.user-dropdown-content');
+            if (content) {
+                content.style.display = 'none';
+            }
+        });
+    });
+});
+{% comment %}  {% endcomment %}
+document.addEventListener("click", function (e) {
+    const userMenu = document.querySelector(".nav-user-dropdown");
+    const userBtn = document.querySelector(".nav-user-btn");
+
+    if (!userMenu || !userBtn) return;
+
+    if (userBtn.contains(e.target)) {
+        userMenu.style.display = userMenu.style.display === "block" ? "none" : "block";
+    } else {
+        userMenu.style.display = "none";
+    }
+});
+
+</script>

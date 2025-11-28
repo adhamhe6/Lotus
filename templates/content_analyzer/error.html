@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="error-container" style="margin-top: 80px;">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card shadow-sm border-0">
+                    <div class="card-header bg-warning text-dark py-3">
+                        <h4 class="mb-0 text-center">
+                            <i class="fas fa-exclamation-circle me-2"></i>Analysis Error
+                        </h4>
+                    </div>
+                    <div class="card-body p-4 text-center">
+                        <div class="error-icon mb-4">
+                            <i class="fas fa-bug fa-3x text-warning"></i>
+                        </div>
+                        
+                        <h5 class="mb-3 text-danger">Something went wrong with your analysis</h5>
+                        
+                        <div class="error-details bg-light rounded p-3 mb-4 text-start">
+                            <h6 class="fw-bold mb-2">Error Details:</h6>
+                            <code class="text-danger">{{ error }}</code>
+                        </div>
+                        
+                        {% if analysis %}
+                        <div class="analysis-info bg-light rounded p-3 mb-4">
+                            <h6 class="fw-bold text-primary">{{ analysis.name }}</h6>
+                            <p class="mb-1 text-muted">
+                                <i class="fas fa-calendar me-1"></i>
+                                Created: {{ analysis.created_at|date:"F j, Y g:i A" }}
+                            </p>
+                        </div>
+                        {% endif %}
+                        
+                        <p class="text-muted mb-4">
+                            Please try again with different files or parameters. If the problem persists, contact support.
+                        </p>
+                        
+                        <div class="d-flex gap-3 justify-content-center flex-wrap">
+                            <a href="{% url 'content_analyzer_home' %}" class="btn btn-primary btn-lg px-4">
+                                <i class="fas fa-redo me-2"></i>Try Again
+                            </a>
+                            <a href="{% url 'content_analysis_history' %}" class="btn btn-outline-secondary btn-lg px-4">
+                                <i class="fas fa-history me-2"></i>View History
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.error-container {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    min-height: calc(100vh - 80px);
+    padding: 2rem 0;
+}
+
+.card {
+    border-radius: 15px;
+    overflow: hidden;
+}
+
+.error-icon {
+    animation: shake 0.5s ease-in-out;
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+.error-details code {
+    word-break: break-word;
+    white-space: pre-wrap;
+}
+
+.analysis-info {
+    border-left: 4px solid var(--primary);
+}
+
+.btn {
+    border-radius: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+}
+</style>
+{% endblock %}

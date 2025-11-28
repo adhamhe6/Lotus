@@ -1,0 +1,504 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="content-analysis-results" style="margin-top: 80px;">
+    <div class="container-fluid">
+        <!-- Header -->
+        <div class="results-header bg-primary text-white py-4 mb-4">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-md-8">
+                        <h1 class="h2 mb-1">{{ analysis.name }}</h1>
+                        <p class="mb-0 opacity-75">
+                            <i class="fas fa-calendar me-1"></i>
+                            {{ analysis.created_at|date:"F j, Y g:i A" }}
+                            {% if analysis.is_completed %}
+                            <span class="badge bg-success ms-2">Completed</span>
+                            {% endif %}
+                        </p>
+                    </div>
+                    <div class="col-md-4 text-md-end">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-light dropdown-toggle" data-bs-toggle="dropdown">
+                                <i class="fas fa-download me-1"></i>Download Report
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="{% url 'download_content_report' analysis.id 'pdf' %}">
+                                    <i class="fas fa-file-pdf text-danger me-2"></i>PDF Report
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'download_content_report' analysis.id 'excel' %}">
+                                    <i class="fas fa-file-excel text-success me-2"></i>Excel Report
+                                </a></li>
+                                <li><a class="dropdown-item" href="{% url 'download_content_report' analysis.id 'csv' %}">
+                                    <i class="fas fa-file-csv text-info me-2"></i>CSV Report
+                                </a></li>
+                            </ul>
+                        </div>
+                        <a href="{% url 'content_analyzer_home' %}" class="btn btn-outline-light ms-2">
+                            <i class="fas fa-plus me-1"></i>New Analysis
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <!-- Left: Analysis Results -->
+                <div class="col-lg-8">
+                    <!-- Summary Card -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0"><i class="fas fa-chart-bar me-2 text-primary"></i>Analysis Summary</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <div class="table-responsive">
+                                <table class="table table-hover mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th class="ps-4">Keyword</th>
+                                            <th class="text-center">Frequency</th>
+                                            <th class="text-center">Percentage</th>
+                                            <th class="text-center">Trend</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for item in results.summary %}
+                                        <tr>
+                                            <td class="ps-4 fw-semibold">{{ item.keyword }}</td>
+                                            <td class="text-center">
+                                                <span class="badge bg-primary rounded-pill">{{ item.count }}</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <span class="fw-bold text-dark">{{ item.percentage }}%</span>
+                                            </td>
+                                            <td class="text-center">
+                                                <div class="progress" style="height: 8px; width: 100px; margin: 0 auto;">
+                                                    <div class="progress-bar bg-success" role="progressbar" 
+                                                         style="width: {{ item.percentage }}%"
+                                                         aria-valuenow="{{ item.percentage }}" aria-valuemin="0" aria-valuemax="100">
+                                                    </div>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Per-File Analysis -->
+                    {% if results.per_file %}
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0"><i class="fas fa-file-alt me-2 text-primary"></i>Per-File Analysis</h5>
+                        </div>
+                        <div class="card-body">
+                            {% for file_name, file_data in results.per_file.items %}
+                            <div class="file-analysis-item mb-4">
+                                <h6 class="text-primary mb-3">
+                                    <i class="fas fa-file me-2"></i>{{ file_name }}
+                                </h6>
+                                <div class="row g-2">
+                                    {% for keyword, count in file_data.items %}
+                                    <div class="col-md-4 col-sm-6">
+                                        <div class="keyword-item border rounded p-2 d-flex justify-content-between align-items-center">
+                                            <span class="fw-medium">{{ keyword }}</span>
+                                            <span class="badge bg-secondary">{{ count }}</span>
+                                        </div>
+                                    </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% if not forloop.last %}<hr>{% endif %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <!-- File Contents Preview -->
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0"><i class="fas fa-search me-2 text-primary"></i>File Contents Preview</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="accordion" id="fileContentsAccordion">
+                                {% for file_name, content in file_contents.items %}
+                                <div class="accordion-item">
+                                    <h2 class="accordion-header">
+                                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" 
+                                                data-bs-target="#collapse{{ forloop.counter }}">
+                                            <i class="fas fa-file me-2"></i>{{ file_name }}
+                                            <span class="badge bg-secondary ms-2">{{ content|length }} characters</span>
+                                        </button>
+                                    </h2>
+                                    <div id="collapse{{ forloop.counter }}" class="accordion-collapse collapse" 
+                                         data-bs-parent="#fileContentsAccordion">
+                                        <div class="accordion-body">
+                                            <pre class="mb-0" style="font-size: 0.875rem; max-height: 300px; overflow-y: auto;"><code>{{ content|truncatewords:200 }}</code></pre>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right: AI Chat & Analysis Info -->
+                <div class="col-lg-4">
+                    <!-- AI Chat Assistant -->
+                    <div class="card shadow-sm border-0 mb-4">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0"><i class="fas fa-robot me-2 text-primary"></i>AI Analysis Assistant</h5>
+                        </div>
+                        <div class="card-body p-0">
+                            <!-- Chat Messages -->
+                            <div id="chat-messages" class="p-3" style="height: 300px; overflow-y: auto; background: #f8f9fa;">
+                                <div class="text-center text-muted py-4">
+                                    <i class="fas fa-comments fa-2x mb-2"></i>
+                                    <p>Ask me about your analysis results!</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Chat Input -->
+                            <div class="p-3 border-top">
+                                <form id="chat-form" class="d-flex gap-2">
+                                    {% csrf_token %}
+                                    <input type="text" id="chat-input" class="form-control" placeholder="Type your question..." maxlength="1000">
+                                    <button type="submit" class="btn btn-primary">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </button>
+                                </form>
+                                <div class="form-text mt-2">
+                                    Ask about keyword trends, insights, or analysis interpretation.
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Analysis Information -->
+                    <div class="card shadow-sm border-0">
+                        <div class="card-header bg-white py-3">
+                            <h5 class="mb-0"><i class="fas fa-info-circle me-2 text-primary"></i>Analysis Information</h5>
+                        </div>
+                        <div class="card-body">
+                            <div class="analysis-info">
+                                <div class="info-item d-flex justify-content-between py-2 border-bottom">
+                                    <span class="fw-medium">Analysis Type:</span>
+                                    <span class="text-muted">{{ analysis.get_analysis_type_display }}</span>
+                                </div>
+                                <div class="info-item d-flex justify-content-between py-2 border-bottom">
+                                    <span class="fw-medium">Report Language:</span>
+                                    <span class="text-muted">{{ analysis.get_report_language_display }}</span>
+                                </div>
+                                <div class="info-item d-flex justify-content-between py-2 border-bottom">
+                                    <span class="fw-medium">Files Analyzed:</span>
+                                    <span class="text-muted">{{ results.total_files }}</span>
+                                </div>
+                                <div class="info-item d-flex justify-content-between py-2 border-bottom">
+                                    <span class="fw-medium">Keywords:</span>
+                                    <span class="text-muted">{{ analysis.get_keywords_list|length }}</span>
+                                </div>
+                                <div class="info-item d-flex justify-content-between py-2">
+                                    <span class="fw-medium">Total Occurrences:</span>
+                                    <span class="text-muted">
+                                        {% with total=results.summary|map_dict:"count"|sum %}
+                                        {{ total }}
+                                        {% endwith %}
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            <div class="mt-4">
+                                <h6 class="fw-semibold mb-2">Keywords:</h6>
+                                <div class="keyword-tags">
+                                    {% for keyword in analysis.get_keywords_list %}
+                                    <span class="badge bg-light text-dark border me-1 mb-1">{{ keyword }}</span>
+                                    {% endfor %}
+                                </div>
+                            </div>
+
+                            <div class="mt-4 pt-3 border-top">
+                                <a href="{% url 'delete_content_analysis' analysis.id %}" class="btn btn-outline-danger btn-sm w-100">
+                                    <i class="fas fa-trash me-1"></i>Delete Analysis
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.content-analysis-results {
+    background: #f8f9fa;
+    min-height: calc(100vh - 80px);
+}
+
+.results-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a57 100%) !important;
+}
+
+.card {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.table th {
+    border-top: none;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.875rem;
+    letter-spacing: 0.5px;
+}
+
+.keyword-item {
+    transition: all 0.3s ease;
+    background: white;
+}
+
+.keyword-item:hover {
+    background: #f8f9fa;
+    transform: translateY(-1px);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.file-analysis-item:last-child {
+    margin-bottom: 0 !important;
+}
+
+.progress {
+    border-radius: 10px;
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: #e7f1ff;
+    color: var(--primary);
+}
+
+.accordion-button:focus {
+    box-shadow: none;
+    border-color: rgba(0,0,0,.125);
+}
+
+#chat-messages {
+    border-bottom: 1px solid #dee2e6;
+}
+
+.chat-message {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+    border-radius: 10px;
+    max-width: 85%;
+}
+
+.chat-message.user {
+    background: #e3f2fd;
+    margin-left: auto;
+    border-bottom-right-radius: 2px;
+}
+
+.chat-message.assistant {
+    background: white;
+    border: 1px solid #e9ecef;
+    margin-right: auto;
+    border-bottom-left-radius: 2px;
+}
+
+.chat-message .timestamp {
+    font-size: 0.75rem;
+    color: #6c757d;
+    margin-top: 0.25rem;
+}
+
+.analysis-info .info-item:last-child {
+    border-bottom: none !important;
+}
+
+.keyword-tags {
+    max-height: 120px;
+    overflow-y: auto;
+}
+
+/* Custom scrollbar */
+#chat-messages::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-messages::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+}
+
+#chat-messages::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+}
+
+/* Loading animation */
+.loading-dots {
+    display: inline-block;
+}
+
+.loading-dots:after {
+    content: '...';
+    animation: dots 1.5s steps(4, end) infinite;
+}
+
+@keyframes dots {
+    0%, 20% { color: rgba(0,0,0,0); text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+    40% { color: black; text-shadow: .25em 0 0 rgba(0,0,0,0), .5em 0 0 rgba(0,0,0,0); }
+    60% { text-shadow: .25em 0 0 black, .5em 0 0 rgba(0,0,0,0); }
+    80%, 100% { text-shadow: .25em 0 0 black, .5em 0 0 black; }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .results-header .btn-group {
+        margin-top: 1rem;
+        width: 100%;
+    }
+    
+    .results-header .btn {
+        width: 100%;
+    }
+    
+    .chat-message {
+        max-width: 95%;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const chatForm = document.getElementById('chat-form');
+    const chatInput = document.getElementById('chat-input');
+    const chatMessages = document.getElementById('chat-messages');
+    const analysisId = {{ analysis.id }};
+
+    // Load chat history
+    function loadChatHistory() {
+        fetch(`/content-analyzer/analysis/${analysisId}/chat/history/`)
+            .then(response => response.json())
+            .then(data => {
+                chatMessages.innerHTML = '';
+                if (data.messages && data.messages.length > 0) {
+                    data.messages.forEach(msg => {
+                        addMessageToChat(msg.role, msg.content, msg.timestamp);
+                    });
+                } else {
+                    chatMessages.innerHTML = `
+                        <div class="text-center text-muted py-4">
+                            <i class="fas fa-comments fa-2x mb-2"></i>
+                            <p>Ask me about your analysis results!</p>
+                        </div>
+                    `;
+                }
+                scrollToBottom();
+            })
+            .catch(error => {
+                console.error('Error loading chat history:', error);
+            });
+    }
+
+    // Add message to chat
+    function addMessageToChat(role, content, timestamp = null) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${role}`;
+        
+        const time = timestamp ? new Date(timestamp).toLocaleTimeString() : new Date().toLocaleTimeString();
+        
+        messageDiv.innerHTML = `
+            <div class="fw-semibold mb-1">${role === 'user' ? 'You' : 'Assistant'}</div>
+            <div class="message-content">${content}</div>
+            <div class="timestamp">${time}</div>
+        `;
+        
+        // Remove initial placeholder if it exists
+        if (chatMessages.querySelector('.text-center')) {
+            chatMessages.innerHTML = '';
+        }
+        
+        chatMessages.appendChild(messageDiv);
+        scrollToBottom();
+    }
+
+    // Scroll to bottom of chat
+    function scrollToBottom() {
+        chatMessages.scrollTop = chatMessages.scrollHeight;
+    }
+
+    // Handle chat form submission
+    chatForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const message = chatInput.value.trim();
+        if (!message) return;
+
+        // Add user message immediately
+        addMessageToChat('user', message);
+        
+        // Add loading indicator for AI response
+        const loadingDiv = document.createElement('div');
+        loadingDiv.className = 'chat-message assistant';
+        loadingDiv.innerHTML = `
+            <div class="fw-semibold mb-1">Assistant</div>
+            <div class="message-content loading-dots">Thinking</div>
+        `;
+        chatMessages.appendChild(loadingDiv);
+        scrollToBottom();
+
+        // Clear input
+        chatInput.value = '';
+
+        // Send message to server
+        const formData = new FormData();
+        formData.append('message', message);
+        formData.append('csrfmiddlewaretoken', document.querySelector('[name=csrfmiddlewaretoken]').value);
+
+        fetch(`/content-analyzer/analysis/${analysisId}/chat/`, {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Remove loading indicator
+            chatMessages.removeChild(loadingDiv);
+            
+            if (data.error) {
+                addMessageToChat('assistant', `Error: ${data.error}`);
+            } else {
+                addMessageToChat('assistant', data.ai_response);
+            }
+        })
+        .catch(error => {
+            // Remove loading indicator
+            chatMessages.removeChild(loadingDiv);
+            addMessageToChat('assistant', 'Error: Failed to send message');
+            console.error('Error:', error);
+        });
+    });
+
+    // Load initial chat history
+    loadChatHistory();
+
+    // Auto-focus chat input
+    chatInput.focus();
+
+    // Add keyboard shortcut (Ctrl+Enter to send)
+    chatInput.addEventListener('keydown', function(e) {
+        if (e.ctrlKey && e.key === 'Enter') {
+            chatForm.dispatchEvent(new Event('submit'));
+        }
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,920 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <span class="section-tag" data-en="Decision Analytics" data-ar="تحليل القرارات">Decision Analytics</span>
+                <h1 class="dashboard-title" data-en="Strategic Decision Intelligence Platform" data-ar="منصة ذكاء القرارات الاستراتيجية">Strategic Decision Intelligence Platform</h1>
+                <p class="dashboard-subtitle" data-en="Advanced probabilistic modeling and simulation analytics for data-driven strategic decision making under uncertainty" data-ar="نمذجة احتمالية متقدمة ومحاكاة تحليلية لاتخاذ القرارات الاستراتيجية القائمة على البيانات في ظل عدم اليقين">
+                    Advanced probabilistic modeling and simulation analytics for data-driven strategic decision making under uncertainty
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+        <div class="container">
+            <div class="upload-card">
+                <div class="upload-header">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h2 data-en="Upload Decision Parameters" data-ar="رفع معايير القرار">Upload Decision Parameters</h2>
+                </div>
+                <p class="upload-description" data-en="Upload a CSV file containing decision alternatives, probability distributions, and success parameters for comprehensive Monte Carlo simulation analysis" data-ar="قم بتحميل ملف CSV يحتوي على بدائل القرار، التوزيعات الاحتمالية، ومعايير النجاح لتحليل محاكاة مونت كارلو الشامل">
+                    Upload a CSV file containing decision alternatives, probability distributions, and success parameters for comprehensive Monte Carlo simulation analysis
+                </p>
+                
+                <form method="post" enctype="multipart/form-data" class="upload-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label class="file-label">
+                            <span data-en="Select Decision Matrix (CSV)" data-ar="اختر مصفوفة القرار (CSV)">Select Decision Matrix (CSV)</span>
+                            <input type="file" name="file" accept=".csv" required class="file-input">
+                            <div class="file-custom">
+                                <i class="fas fa-file-csv"></i>
+                                <span data-en="Choose file..." data-ar="اختر ملف...">Choose file...</span>
+                            </div>
+                        </label>
+                        <small class="form-text" data-en="Required columns: decision, distribution, params, success_prob" data-ar="الأعمدة المطلوبة: decision, distribution, params, success_prob">
+                            Required columns: decision, distribution, params, success_prob
+                        </small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="runs" data-en="Simulation Iterations:" data-ar="تكرارات المحاكاة:">Simulation Iterations:</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-chart-bar"></i>
+                            <input type="number" name="runs" id="runs" value="1000" min="100" max="100000" step="100">
+                        </div>
+                        <small class="form-text" data-en="Higher iterations provide more accurate results but take longer to compute" data-ar="التكرارات الأعلى تعطي نتائج أكثر دقة ولكنها تستغرق وقتاً أطول في الحساب">
+                            Higher iterations provide more accurate results but take longer to compute
+                        </small>
+                    </div>
+                    
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn primary">
+                            <i class="fas fa-play-circle"></i>
+                            <span data-en="Execute Simulation Analysis" data-ar="تنفيذ تحليل المحاكاة">Execute Simulation Analysis</span>
+                        </button>
+                        <button type="button" class="submit-btn secondary" id="sample-data-btn">
+                            <i class="fas fa-download"></i>
+                            <span data-en="Download Sample Data" data-ar="تحميل بيانات نموذجية">Download Sample Data</span>
+                        </button>
+                    </div>
+                </form>
+                
+                {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    {% if summary_table_html %}
+    <section class="results-section" id="results-section">
+        <div class="container">
+            <div class="results-header">
+                <div class="results-title-section">
+                    <h2 data-en="Simulation Results" data-ar="نتائج المحاكاة">Simulation Results</h2>
+                    <div class="run-info-single-line">
+                        <span class="run-id" data-en="Run ID:" data-ar="معرف التشغيل:">Run ID: {{ run_id }}</span>
+                        <span class="run-separator">—</span>
+                        <span class="run-time" data-en="Run at:" data-ar="وقت التشغيل:">Run at: {{ run_at }}</span>
+                    </div>
+                </div>
+                <div class="results-actions">
+                    <button id="download-pdf" class="action-btn pdf-btn">
+                        <i class="fas fa-file-pdf"></i>
+                        <span data-en="Export PDF" data-ar="تصدير PDF">Export PDF</span>
+                    </button>
+                    <button id="download-csv" class="action-btn csv-btn">
+                        <i class="fas fa-file-csv"></i>
+                        <span data-en="Export CSV" data-ar="تصدير CSV">Export CSV</span>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Executive Summary -->
+            <div class="executive-summary">
+                <div class="summary-card">
+                    <div class="summary-header">
+                        <i class="fas fa-chart-line"></i>
+                        <h3 data-en="Executive Summary" data-ar="ملخص تنفيذي">Executive Summary</h3>
+                    </div>
+                    <div class="summary-content">
+                        <p data-en="Monte Carlo simulation completed with {{ runs|default:'1000' }} iterations per decision alternative. Analysis provides probabilistic outcomes and success metrics for informed strategic planning." data-ar="تم الانتهاء من محاكاة مونت كارلو مع {{ runs|default:'1000' }} تكرار لكل بديل قرار. يوفر التحليل نتائج احتمالية ومقاييس نجاح للتخطيط الاستراتيجي المستنير.">
+                            Monte Carlo simulation completed with <strong>{{ runs|default:"1000" }} iterations</strong> per decision alternative. Analysis provides probabilistic outcomes and success metrics for informed strategic planning.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Unified Section Container -->
+            <div class="unified-sections">
+                <!-- Summary Table -->
+                <div class="results-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-table"></i> <span data-en="Decision Performance Metrics" data-ar="مقاييس أداء القرار">Decision Performance Metrics</span></h3>
+                    </div>
+                    <div class="table-responsive">
+                        {{ summary_table_html|safe }}
+                    </div>
+                </div>
+                
+                <!-- Charts -->
+                <div class="results-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-chart-bar"></i> <span data-en="Analytical Visualizations" data-ar="التصورات التحليلية">Analytical Visualizations</span></h3>
+                    </div>
+                    <div class="charts-section">
+                        <div class="charts-grid">
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h4 data-en="Empirical Cumulative Distribution" data-ar="التوزيع التراكمي التجريبي">Empirical Cumulative Distribution</h4>
+                                    <span class="chart-description" data-en="Cumulative probability distribution of outcomes" data-ar="التوزيع الاحتمالي التراكمي للنتائج">Cumulative probability distribution of outcomes</span>
+                                </div>
+                                <div class="chart-container">
+                                    <img src="{{ images.ecdf }}" alt="ECDF Chart" class="chart-image">
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h4 data-en="Outcome Distribution Analysis" data-ar="تحليل توزيع النتائج">Outcome Distribution Analysis</h4>
+                                    <span class="chart-description" data-en="Frequency distribution of simulated outcomes" data-ar="التوزيع التكراري للنتائج المحاكاة">Frequency distribution of simulated outcomes</span>
+                                </div>
+                                <div class="chart-container">
+                                    <img src="{{ images.hist }}" alt="Histogram" class="chart-image">
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h4 data-en="Statistical Comparison" data-ar="المقارنة الإحصائية">Statistical Comparison</h4>
+                                    <span class="chart-description" data-en="Box plot visualization showing value distribution" data-ar="تصور مخطط الصندوق يظهر توزيع القيم">Box plot visualization showing value distribution</span>
+                                </div>
+                                <div class="chart-container">
+                                    <img src="{{ images.box }}" alt="Boxplot" class="chart-image">
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h4 data-en="Success Probability Analysis" data-ar="تحليل احتمالية النجاح">Success Probability Analysis</h4>
+                                    <span class="chart-description" data-en="Comparative success rates across alternatives" data-ar="معدلات النجاح المقارنة عبر البدائل">Comparative success rates across alternatives</span>
+                                </div>
+                                <div class="chart-container">
+                                    <img src="{{ images.success_bar }}" alt="Success Rate" class="chart-image">
+                                </div>
+                            </div>
+                            
+                            <div class="chart-card">
+                                <div class="chart-header">
+                                    <h4 data-en="Risk-Return Profile" data-ar="ملف المخاطرة والعائد">Risk-Return Profile</h4>
+                                    <span class="chart-description" data-en="Expected value versus success rate trade-off" data-ar="مقايضة القيمة المتوقعة مقابل معدل النجاح">Expected value versus success rate trade-off</span>
+                                </div>
+                                <div class="chart-container">
+                                    <img src="{{ images.ev_sr }}" alt="EV vs Success Rate" class="chart-image">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    {% else %}
+    <!-- Empty State -->
+    <section class="empty-state">
+        <div class="container">
+            <div class="empty-content">
+                <i class="fas fa-chart-line"></i>
+                <h3 data-en="Awaiting Analysis Execution" data-ar="في انتظار تنفيذ التحليل">Awaiting Analysis Execution</h3>
+                <p data-en="Upload a decision matrix CSV file and execute simulation to generate comprehensive analytical insights" data-ar="قم بتحميل ملف مصفوفة القرار CSV وقم بتنفيذ المحاكاة لإنشاء رؤى تحليلية شاملة">
+                    Upload a decision matrix CSV file and execute simulation to generate comprehensive analytical insights
+                </p>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+</div>
+
+<!-- Include jsPDF and html2canvas for PDF generation -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+<style>
+    /* Dashboard Styles */
+    .dashboard-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .dashboard-header {
+        background: linear-gradient(135deg, var(--primary) 0%, #1a3a57 100%);
+        color: white;
+        padding: 4rem 0 2rem;
+        text-align: center;
+    }
+    
+    .dashboard-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+    
+    .upload-section {
+        padding: 3rem 0;
+    }
+    
+    .upload-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 2.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .upload-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .upload-header i {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-right: 1rem;
+    }
+    
+    .upload-header h2 {
+        margin: 0;
+        color: var(--primary);
+    }
+    
+    .upload-description {
+        color: #666;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .file-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+    
+    .file-input {
+        display: none;
+    }
+    
+    .file-custom {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f9f9f9;
+    }
+    
+    .file-custom:hover {
+        border-color: var(--accent);
+        background: #f0f7f7;
+    }
+    
+    .file-custom i {
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin-right: 1rem;
+    }
+    
+    .input-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .input-with-icon i {
+        position: absolute;
+        left: 1rem;
+        color: var(--accent);
+    }
+    
+    .input-with-icon input {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .submit-btn {
+        flex: 1;
+        border: none;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn.primary {
+        background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+        color: white;
+    }
+    
+    .submit-btn.secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .submit-btn.primary:hover {
+        box-shadow: 0 5px 15px rgba(40, 122, 125, 0.3);
+    }
+    
+    .submit-btn i {
+        margin-right: 0.5rem;
+    }
+    
+    .error-message {
+        background: #ffeaea;
+        color: #d32f2f;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .error-message i {
+        margin-right: 0.5rem;
+    }
+    
+    .results-section {
+        padding: 3rem 0;
+    }
+    
+    .results-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+        gap: 2rem;
+    }
+    
+    .results-title-section h2 {
+        color: var(--primary);
+        margin: 0 0 0.5rem 0;
+        font-size: 2rem;
+    }
+    
+    .run-info-single-line {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        color: #666;
+        font-size: 0.95rem;
+    }
+    
+    .run-separator {
+        color: #999;
+    }
+    
+    .results-actions {
+        display: flex;
+        gap: 0.75rem;
+        flex-shrink: 0;
+    }
+    
+    .action-btn {
+        display: flex;
+        align-items: center;
+        padding: 0.6rem 1.2rem;
+        border: none;
+        border-radius: 6px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 0.9rem;
+        white-space: nowrap;
+    }
+    
+    .pdf-btn {
+        background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+        color: white;
+    }
+    
+    .csv-btn {
+        background: linear-gradient(135deg, #388e3c 0%, #2e7d32 100%);
+        color: white;
+    }
+    
+    .action-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+    }
+    
+    .action-btn i {
+        margin-right: 0.5rem;
+    }
+    
+    .executive-summary {
+        margin-bottom: 2rem;
+    }
+    
+    .summary-card {
+        background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+        border-radius: 12px;
+        padding: 2rem;
+        border-left: 4px solid var(--accent);
+    }
+    
+    .summary-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .summary-header i {
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin-right: 1rem;
+    }
+    
+    .summary-header h3 {
+        margin: 0;
+        color: var(--primary);
+    }
+    
+    .summary-content p {
+        margin: 0;
+        color: #455a64;
+        line-height: 1.6;
+    }
+    
+    .unified-sections {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .results-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: var(--primary);
+        color: white;
+        padding: 1.5rem;
+    }
+    
+    .card-header h3 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+    }
+    
+    .card-header i {
+        margin-right: 0.75rem;
+    }
+    
+    .table-responsive {
+        overflow-x: auto;
+        padding: 1.5rem;
+    }
+    
+    .table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    
+    .table th {
+        background: #f5f5f5;
+        padding: 1rem;
+        text-align: left;
+        font-weight: 600;
+        color: var(--primary);
+        border-bottom: 1px solid #ddd;
+    }
+    
+    .table td {
+        padding: 1rem;
+        border-bottom: 1px solid #eee;
+    }
+    
+    .table tr:hover {
+        background: #f9f9f9;
+    }
+    
+    .charts-section {
+        padding: 1.5rem;
+    }
+    
+    .charts-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .chart-card {
+        background: #fafafa;
+        border-radius: 8px;
+        overflow: hidden;
+        border: 1px solid #eee;
+    }
+    
+    .chart-header {
+        padding: 1.25rem;
+        border-bottom: 1px solid #eee;
+        background: #f5f5f5;
+    }
+    
+    .chart-header h4 {
+        margin: 0 0 0.25rem 0;
+        color: var(--primary);
+        font-size: 1.1rem;
+    }
+    
+    .chart-description {
+        color: #666;
+        font-size: 0.85rem;
+    }
+    
+    .chart-container {
+        padding: 1.25rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 250px;
+    }
+    
+    .chart-image {
+        max-width: 100%;
+        height: auto;
+        border-radius: 4px;
+    }
+    
+    .empty-state {
+        padding: 4rem 0;
+        text-align: center;
+    }
+    
+    .empty-content i {
+        font-size: 4rem;
+        color: #ddd;
+        margin-bottom: 1.5rem;
+    }
+    
+    .empty-content h3 {
+        color: #666;
+        margin-bottom: 1rem;
+    }
+    
+    .empty-content p {
+        color: #999;
+        font-size: 1.1rem;
+    }
+    
+    .form-text {
+        display: block;
+        margin-top: 0.5rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    /* Add Roboto font */
+    @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+    
+    /* RTL Support Styles */
+    body.rtl .upload-header i {
+        margin-right: 0;
+        margin-left: 1rem;
+    }
+
+    body.rtl .file-custom i {
+        margin-right: 0;
+        margin-left: 1rem;
+    }
+
+    body.rtl .input-with-icon i {
+        left: auto;
+        right: 1rem;
+    }
+
+    body.rtl .input-with-icon input {
+        padding: 0.75rem 3rem 0.75rem 1rem;
+    }
+
+    body.rtl .submit-btn i {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+
+    body.rtl .error-message i {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+
+    body.rtl .results-header {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .results-actions {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .action-btn i {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+
+    body.rtl .summary-header {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .summary-header i {
+        margin-right: 0;
+        margin-left: 1rem;
+    }
+
+    body.rtl .summary-card {
+        border-left: none;
+        border-right: 4px solid var(--accent);
+    }
+
+    body.rtl .card-header h3 {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .card-header i {
+        margin-right: 0;
+        margin-left: 0.75rem;
+    }
+
+    body.rtl .table th {
+        text-align: right;
+    }
+
+    body.rtl .analysis-header {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .significant {
+        margin-left: 0;
+        margin-right: 2px;
+    }
+
+    body.rtl .interpretation {
+        border-left: none;
+        border-right: 4px solid var(--accent);
+        text-align: right;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .charts-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .dashboard-title {
+            font-size: 2rem;
+        }
+        
+        .upload-card {
+            padding: 1.5rem;
+        }
+        
+        .results-header {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .results-actions {
+            width: 100%;
+            justify-content: flex-start;
+        }
+        
+        .form-actions {
+            flex-direction: column;
+        }
+        
+        .charts-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .run-info-single-line {
+            font-size: 0.9rem;
+        }
+        
+        /* RTL mobile adjustments */
+        body.rtl .analysis-header {
+            align-items: flex-end;
+        }
+        
+        body.rtl .results-header {
+            align-items: flex-end;
+        }
+        
+        body.rtl .results-actions {
+            justify-content: flex-end;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .results-actions {
+            flex-direction: column;
+        }
+        
+        .action-btn {
+            width: 100%;
+            justify-content: center;
+        }
+    }
+</style>
+
+<script>
+    // File input customization
+    document.addEventListener('DOMContentLoaded', function() {
+        const fileInput = document.querySelector('.file-input');
+        const fileCustom = document.querySelector('.file-custom span');
+        const sampleDataBtn = document.getElementById('sample-data-btn');
+        const downloadPdfBtn = document.getElementById('download-pdf');
+        const downloadCsvBtn = document.getElementById('download-csv');
+        
+        // File input handler
+        if (fileInput) {
+            fileInput.addEventListener('change', function() {
+                if (this.files.length > 0) {
+                    fileCustom.textContent = this.files[0].name;
+                } else {
+                    // Update text based on current language
+                    const isRTL = document.body.classList.contains('rtl');
+                    fileCustom.textContent = isRTL ? 'اختر ملف...' : 'Choose file...';
+                }
+            });
+        }
+        
+        // Sample data download
+        if (sampleDataBtn) {
+            sampleDataBtn.addEventListener('click', function() {
+                // Create sample CSV data
+                const sampleData = `decision,distribution,params,success_prob
+Option A,normal,"{'mean': 100, 'std': 15}",0.8
+Option B,uniform,"{'low': 80, 'high': 120}",0.7
+Option C,triangular,"{'left': 90, 'mode': 110, 'right': 130}",0.6
+Option D,exponential,"{'scale': 50}",0.5`;
+                
+                // Create download link
+                const blob = new Blob([sampleData], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'decision_analysis_sample.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+        
+        // PDF Download functionality
+        if (downloadPdfBtn) {
+            downloadPdfBtn.addEventListener('click', function() {
+                // Use html2canvas and jsPDF to generate PDF
+                const { jsPDF } = window.jspdf;
+                
+                // Get the results section
+                const element = document.getElementById('results-section');
+                
+                // Use html2canvas to capture the element
+                html2canvas(element, {
+                    scale: 2,
+                    useCORS: true,
+                    logging: false
+                }).then(function(canvas) {
+                    const imgData = canvas.toDataURL('image/png');
+                    const pdf = new jsPDF('p', 'mm', 'a4');
+                    const imgProps = pdf.getImageProperties(imgData);
+                    const pdfWidth = pdf.internal.pageSize.getWidth();
+                    const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+                    
+                    pdf.addImage(imgData, 'PNG', 0, 0, pdfWidth, pdfHeight);
+                    pdf.save('decision-analysis-report.pdf');
+                });
+            });
+        }
+        
+        // CSV Download functionality
+        if (downloadCsvBtn) {
+            downloadCsvBtn.addEventListener('click', function() {
+                // Extract data from the table
+                const table = document.querySelector('.table');
+                let csv = [];
+                
+                // Get headers
+                const headers = [];
+                for (let i = 0; i < table.rows[0].cells.length; i++) {
+                    headers.push(table.rows[0].cells[i].innerText);
+                }
+                csv.push(headers.join(','));
+                
+                // Get rows
+                for (let i = 1; i < table.rows.length; i++) {
+                    const row = [];
+                    for (let j = 0; j < table.rows[i].cells.length; j++) {
+                        row.push(table.rows[i].cells[j].innerText);
+                    }
+                    csv.push(row.join(','));
+                }
+                
+                // Create download link
+                const blob = new Blob([csv.join('\n')], { type: 'text/csv' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'decision-analysis-results.csv';
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+            });
+        }
+
+        // Language text update function
+        function updateTextContent() {
+            const isRTL = document.body.classList.contains('rtl');
+            const elements = document.querySelectorAll('[data-en], [data-ar]');
+            elements.forEach(element => {
+                const text = isRTL ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) element.textContent = text;
+            });
+        }
+
+        // Initial update
+        updateTextContent();
+
+        // Listen for language changes
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    updateTextContent();
+                }
+            });
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    });
+</script>
+{% endblock %}

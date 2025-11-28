@@ -1,0 +1,412 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="projects-container" style="margin-top: 50px;">
+    <div class="projects-header">
+        <div class="container">
+            <h1>My Projects</h1>
+            <p>Manage and track all your research projects in one place</p>
+        </div>
+    </div>
+
+    <div class="projects-content">
+        <div class="container">
+            <!-- Projects Toolbar -->
+            <div class="projects-toolbar">
+                <div class="search-box">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search projects...">
+                </div>
+                <div class="toolbar-actions">
+                    <select class="filter-select">
+                        <option>All Projects</option>
+                        <option>Active</option>
+                        <option>Completed</option>
+                        <option>Archived</option>
+                    </select>
+                    <button class="btn primary">
+                        <i class="fas fa-plus"></i>
+                        New Project
+                    </button>
+                </div>
+            </div>
+
+            <!-- Projects Grid -->
+            <div class="projects-grid">
+                {% for i in "123456" %}
+                <div class="project-card">
+                    <div class="project-image">
+                        <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=500&q=80" alt="Project {{ i }}">
+                    </div>
+                    <div class="project-content">
+                        <div class="project-header">
+                            <h3>Research Project {{ i }}</h3>
+                            <div class="project-actions">
+                                <button class="icon-btn"><i class="fas fa-ellipsis-v"></i></button>
+                            </div>
+                        </div>
+                        <p class="project-description">
+                            Qualitative analysis of customer feedback data for product improvement and market positioning.
+                        </p>
+                        <div class="project-meta">
+                            <span class="meta-item">
+                                <i class="fas fa-database"></i>
+                                1.2K records
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-calendar"></i>
+                                Updated 2 days ago
+                            </span>
+                        </div>
+                        <div class="project-footer">
+                            <span class="status-badge in-progress">In Progress</span>
+                            <div class="project-members">
+                                <div class="member-avatars">
+                                    <div class="member-avatar">A</div>
+                                    <div class="member-avatar">B</div>
+                                    <div class="member-avatar">+2</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Empty State (commented out for now) -->
+            <!--
+            <div class="empty-state">
+                <i class="fas fa-project-diagram"></i>
+                <h3>No Projects Yet</h3>
+                <p>Get started by creating your first research project</p>
+                <button class="btn primary">
+                    <i class="fas fa-plus"></i>
+                    Create Project
+                </button>
+            </div>
+            -->
+        </div>
+    </div>
+</div>
+
+<style>
+.projects-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.projects-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a57 100%);
+    color: white;
+    padding: 3rem 0;
+}
+
+.projects-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+}
+
+.projects-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.projects-content {
+    padding: 3rem 0;
+}
+
+.projects-toolbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    gap: 1rem;
+}
+
+.search-box {
+    position: relative;
+    flex: 1;
+    max-width: 400px;
+}
+
+.search-box i {
+    position: absolute;
+    left: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #666;
+}
+
+.search-box input {
+    width: 100%;
+    padding: 0.75rem 1rem 0.75rem 3rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.toolbar-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.filter-select {
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background: white;
+    font-size: 1rem;
+}
+
+.btn {
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.3s ease;
+}
+
+.btn.primary {
+    background: var(--accent);
+    color: white;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 2rem;
+}
+
+.project-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.project-image {
+    height: 160px;
+    overflow: hidden;
+}
+
+.project-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-content {
+    padding: 1.5rem;
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-header h3 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.2rem;
+}
+
+.project-actions {
+    position: relative;
+}
+
+.icon-btn {
+    background: none;
+    border: none;
+    color: #666;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.icon-btn:hover {
+    background: #f5f5f5;
+}
+
+.project-description {
+    color: #666;
+    margin: 0 0 1.5rem 0;
+    line-height: 1.5;
+    font-size: 0.95rem;
+}
+
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.meta-item i {
+    width: 16px;
+    color: var(--accent);
+}
+
+.project-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.status-badge {
+    padding: 0.35rem 1rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-badge.in-progress {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.status-badge.completed {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.status-badge.pending {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.project-members {
+    display: flex;
+    align-items: center;
+}
+
+.member-avatars {
+    display: flex;
+}
+
+.member-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--primary);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin-left: -8px;
+    border: 2px solid white;
+}
+
+.member-avatar:first-child {
+    margin-left: 0;
+}
+
+.member-avatar:nth-child(2) {
+    background: var(--accent);
+}
+
+.member-avatar:nth-child(3) {
+    background: #666;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 1.5rem;
+}
+
+.empty-state h3 {
+    margin: 0 0 1rem 0;
+    color: #666;
+}
+
+.empty-state p {
+    margin: 0 0 2rem 0;
+}
+
+/* RTL Support */
+body.rtl .search-box i {
+    left: auto;
+    right: 1rem;
+}
+
+body.rtl .search-box input {
+    padding: 0.75rem 3rem 0.75rem 1rem;
+}
+
+body.rtl .btn {
+    flex-direction: row-reverse;
+}
+
+body.rtl .meta-item {
+    flex-direction: row-reverse;
+}
+
+body.rtl .member-avatar {
+    margin-left: 0;
+    margin-right: -8px;
+}
+
+body.rtl .member-avatar:first-child {
+    margin-right: 0;
+}
+
+@media (max-width: 768px) {
+    .projects-toolbar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .search-box {
+        max-width: none;
+    }
+    
+    .toolbar-actions {
+        justify-content: space-between;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-header h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+{% endblock %}

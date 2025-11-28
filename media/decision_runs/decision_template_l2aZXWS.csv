@@ -1,0 +1,4 @@
+﻿decision,group,distribution,params,success_prob
+Option A,Product,normal,"{""mean"": 100, ""std"": 20}",0.7
+Option B,Product,uniform,"{""low"": 50, ""high"": 150}",0.6
+Option C,Market,triangular,"{""left"": 40, ""mode"": 90, ""right"": 160}",0.8

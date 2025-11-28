@@ -1,0 +1,21 @@
+Age,Income,EducationLevel,Region,SatisfactionScore,ProductUsage
+25,35000,High School,North,72,15
+32,45000,Bachelor,South,68,12
+45,75000,Master,East,88,25
+28,38000,Bachelor,West,65,10
+51,92000,PhD,North,92,30
+36,52000,Bachelor,East,78,18
+42,68000,Master,South,85,22
+29,41000,High School,West,60,8
+47,81000,Master,North,89,26
+33,49000,Bachelor,East,75,16
+39,62000,Bachelor,South,82,20
+26,36000,High School,West,58,7
+44,72000,Master,East,87,24
+31,44000,Bachelor,North,70,14
+48,85000,PhD,South,94,32
+37,55000,Bachelor,East,80,19
+43,69000,Master,North,86,23
+30,42000,High School,South,62,9
+46,78000,Master,West,90,28
+34,51000,Bachelor,North,76,17

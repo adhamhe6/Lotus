@@ -1,0 +1,390 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-container" style="margin-top: 50px;">
+    <div class="dashboard-header">
+        <div class="container">
+            <h1>Dashboard</h1>
+            <p>Welcome back, {{ user.first_name|default:user.username }}! Here's your research overview.</p>
+        </div>
+    </div>
+
+    <div class="dashboard-content">
+        <div class="container">
+            <!-- Stats Overview -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-project-diagram"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>12</h3>
+                        <p>Active Projects</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-chart-bar"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>47</h3>
+                        <p>Analyses Completed</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>8</h3>
+                        <p>Reports Generated</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="stat-info">
+                        <h3>3</h3>
+                        <p>Pending Tasks</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recent Projects -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Recent Projects</h2>
+                    <a href="{% url 'my_projects' %}" class="view-all">View All</a>
+                </div>
+                <div class="projects-grid">
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Market Research Q4 2024</h3>
+                            <span class="status-badge completed">Completed</span>
+                        </div>
+                        <p>Customer sentiment analysis for product launch</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: 2 days ago</span>
+                            <span><i class="fas fa-database"></i> 1.2K records</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Academic Survey Analysis</h3>
+                            <span class="status-badge in-progress">In Progress</span>
+                        </div>
+                        <p>Qualitative analysis of student feedback data</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: 1 hour ago</span>
+                            <span><i class="fas fa-database"></i> 850 records</span>
+                        </div>
+                    </div>
+                    <div class="project-card">
+                        <div class="project-header">
+                            <h3>Competitor Analysis</h3>
+                            <span class="status-badge pending">Pending</span>
+                        </div>
+                        <p>Market positioning and sentiment analysis</p>
+                        <div class="project-meta">
+                            <span><i class="fas fa-calendar"></i> Last updated: 1 week ago</span>
+                            <span><i class="fas fa-database"></i> 2.5K records</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quick Actions -->
+            <div class="section">
+                <div class="section-header">
+                    <h2>Quick Actions</h2>
+                </div>
+                <div class="actions-grid">
+                    <a href="{% url 'products' %}" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <h3>New Analysis</h3>
+                        <p>Start a new data analysis project</p>
+                    </a>
+                    <a href="{% url 'my_projects' %}" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-upload"></i>
+                        </div>
+                        <h3>Upload Data</h3>
+                        <p>Upload new dataset for analysis</p>
+                    </a>
+                    <a href="#" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3>View Reports</h3>
+                        <p>Access your generated reports</p>
+                    </a>
+                    <a href="{% url 'profile' %}" class="action-card">
+                        <div class="action-icon">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <h3>Settings</h3>
+                        <p>Manage your account preferences</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+.dashboard-container {
+    min-height: 100vh;
+    background: #f8f9fa;
+}
+
+.dashboard-header {
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3a57 100%);
+    color: white;
+    padding: 3rem 0;
+}
+
+.dashboard-header h1 {
+    margin: 0 0 0.5rem 0;
+    font-size: 2.5rem;
+}
+
+.dashboard-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 1.1rem;
+}
+
+.dashboard-content {
+    padding: 3rem 0;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-5px);
+}
+
+.stat-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 1.5rem;
+}
+
+.stat-info h3 {
+    margin: 0 0 0.25rem 0;
+    font-size: 2rem;
+    color: var(--primary);
+}
+
+.stat-info p {
+    margin: 0;
+    color: #666;
+    font-weight: 600;
+}
+
+.section {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    margin-bottom: 2rem;
+}
+
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.section-header h2 {
+    margin: 0;
+    color: var(--primary);
+}
+
+.view-all {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.view-all:hover {
+    text-decoration: underline;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-card {
+    border: 1px solid #eee;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.project-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.project-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.project-header h3 {
+    margin: 0;
+    color: var(--primary);
+    font-size: 1.1rem;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.status-badge.completed {
+    background: #e8f5e8;
+    color: #2e7d32;
+}
+
+.status-badge.in-progress {
+    background: #fff3e0;
+    color: #f57c00;
+}
+
+.status-badge.pending {
+    background: #f5f5f5;
+    color: #666;
+}
+
+.project-card p {
+    margin: 0 0 1rem 0;
+    color: #666;
+    line-height: 1.5;
+}
+
+.project-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #999;
+}
+
+.project-meta i {
+    margin-right: 0.5rem;
+}
+
+.actions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+}
+
+.action-card {
+    background: #f8f9fa;
+    border: 2px dashed #ddd;
+    border-radius: 12px;
+    padding: 2rem 1.5rem;
+    text-align: center;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+}
+
+.action-card:hover {
+    border-color: var(--accent);
+    background: white;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.action-icon {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: white;
+    border: 2px solid var(--accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 1rem;
+    color: var(--accent);
+    font-size: 1.5rem;
+}
+
+.action-card h3 {
+    margin: 0 0 0.5rem 0;
+    color: var(--primary);
+}
+
+.action-card p {
+    margin: 0;
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* RTL Support */
+body.rtl .project-meta i {
+    margin-right: 0;
+    margin-left: 0.5rem;
+}
+
+@media (max-width: 768px) {
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .actions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .section-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+}
+</style>
+{% endblock %}

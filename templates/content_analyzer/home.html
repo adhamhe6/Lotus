@@ -1,0 +1,765 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="dashboard-container">
+    <!-- Header Section -->
+    <section class="dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <span class="section-tag" data-en="Content Analysis" data-ar="تحليل المحتوى">Content Analysis</span>
+                <h1 class="dashboard-title" data-en="AI-Powered Content Analysis Tool" data-ar="أداة تحليل المحتوى المدعومة بالذكاء الاصطناعي">AI-Powered Content Analysis Tool</h1>
+                <p class="dashboard-subtitle" data-en="Analyze keyword frequencies in your documents with advanced AI-powered insights and comprehensive reporting" data-ar="حلل ترددات الكلمات الرئيسية في مستنداتك باستخدام رؤى متقدمة مدعومة بالذكاء الاصطناعي وتقارير شاملة">
+                    Analyze keyword frequencies in your documents with advanced AI-powered insights and comprehensive reporting
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Upload Section -->
+    <section class="upload-section">
+        <div class="container">
+            <div class="upload-card">
+                <div class="upload-header">
+                    <i class="fas fa-chart-bar"></i>
+                    <h2 data-en="New Content Analysis" data-ar="تحليل محتوى جديد">New Content Analysis</h2>
+                </div>
+                <p class="upload-description" data-en="Upload your documents and specify keywords to analyze with AI-powered insights. Supported formats: PDF, Excel (.xlsx, .xls), CSV" data-ar="قم بتحميل مستنداتك وحدد الكلمات الرئيسية لتحليلها باستخدام رؤى مدعومة بالذكاء الاصطناعي. الصيغ المدعومة: PDF، Excel (.xlsx, .xls)، CSV">
+                    Upload your documents and specify keywords to analyze with AI-powered insights. Supported formats: PDF, Excel (.xlsx, .xls), CSV
+                </p>
+                
+                <form method="post" enctype="multipart/form-data" class="upload-form" id="analysis-form">
+                    {% csrf_token %}
+                    
+                    <!-- Analysis Name -->
+                    <div class="form-group">
+                        <label for="{{ form.name.id_for_label }}" class="form-label" data-en="Analysis Name" data-ar="اسم التحليل">Analysis Name</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-file-signature"></i>
+                            {{ form.name }}
+                        </div>
+                        {% if form.name.errors %}
+                        <div class="text-danger small mt-1">{{ form.name.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- File Upload -->
+                    <div class="form-group">
+                        <label class="file-label">
+                            <span data-en="Upload Files" data-ar="رفع الملفات">Upload Files</span>
+                            {{ form.files }}
+                            <div class="file-custom">
+                                <i class="fas fa-file-upload"></i>
+                                <span data-en="Choose files..." data-ar="اختر الملفات...">Choose files...</span>
+                            </div>
+                        </label>
+                        <small class="form-text" data-en="Supported formats: PDF, Excel (.xlsx, .xls), CSV" data-ar="الصيغ المدعومة: PDF، Excel (.xlsx, .xls)، CSV">
+                            Supported formats: PDF, Excel (.xlsx, .xls), CSV
+                        </small>
+                        {% if form.files.errors %}
+                        <div class="text-danger small mt-1">{{ form.files.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <!-- Keywords -->
+                    <div class="form-group">
+                        <label for="{{ form.keywords.id_for_label }}" class="form-label" data-en="Keywords" data-ar="الكلمات الرئيسية">Keywords</label>
+                        <div class="input-with-icon">
+                            <i class="fas fa-key"></i>
+                            {{ form.keywords }}
+                        </div>
+                        <small class="form-text" data-en="Separate multiple keywords with commas" data-ar="افصل بين الكلمات الرئيسية المتعددة بفواصل">
+                            Separate multiple keywords with commas
+                        </small>
+                        {% if form.keywords.errors %}
+                        <div class="text-danger small mt-1">{{ form.keywords.errors }}</div>
+                        {% endif %}
+                    </div>
+
+                    <div class="form-row">
+                        <!-- Analysis Type -->
+                        <div class="form-group">
+                            <label for="{{ form.analysis_type.id_for_label }}" class="form-label" data-en="Analysis Type" data-ar="نوع التحليل">Analysis Type</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-cogs"></i>
+                                {{ form.analysis_type }}
+                            </div>
+                        </div>
+
+                        <!-- Report Language -->
+                        <div class="form-group">
+                            <label for="{{ form.report_language.id_for_label }}" class="form-label" data-en="Report Language" data-ar="لغة التقرير">Report Language</label>
+                            <div class="input-with-icon">
+                                <i class="fas fa-language"></i>
+                                {{ form.report_language }}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="submit" class="submit-btn primary" id="analyze-btn">
+                            <i class="fas fa-play-circle"></i>
+                            <span data-en="Start Analysis" data-ar="بدء التحليل">Start Analysis</span>
+                        </button>
+                        <button type="button" class="submit-btn secondary" id="sample-data-btn">
+                            <i class="fas fa-download"></i>
+                            <span data-en="Sample Documents" data-ar="مستندات نموذجية">Sample Documents</span>
+                        </button>
+                    </div>
+                </form>
+                
+                {% if error %}
+                <div class="error-message">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    {{ error }}
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section class="dashboard-section">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Recent Analyses -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-history"></i> <span data-en="Recent Analyses" data-ar="التحليلات الحديثة">Recent Analyses</span></h3>
+                    </div>
+                    <div class="card-content">
+                        {% if analyses %}
+                        <div class="analysis-list">
+                            {% for analysis in analyses %}
+                            <a href="{% url 'content_analysis_results' analysis.id %}" class="analysis-item">
+                                <div class="analysis-info">
+                                    <h4>{{ analysis.name }}</h4>
+                                    <span class="analysis-date">{{ analysis.created_at|date:"M d, Y H:i" }}</span>
+                                </div>
+                                <span class="status-badge {% if analysis.is_completed %}completed{% else %}processing{% endif %}">
+                                    {% if analysis.is_completed %}
+                                    <i class="fas fa-check-circle"></i>
+                                    <span data-en="Completed" data-ar="مكتمل">Completed</span>
+                                    {% else %}
+                                    <i class="fas fa-spinner fa-spin"></i>
+                                    <span data-en="Processing" data-ar="قيد المعالجة">Processing</span>
+                                    {% endif %}
+                                </span>
+                            </a>
+                            {% endfor %}
+                        </div>
+                        {% else %}
+                        <div class="empty-state-small">
+                            <i class="fas fa-search"></i>
+                            <p data-en="No analyses yet. Start your first analysis!" data-ar="لا توجد تحليلات بعد. ابدأ تحليلك الأول!">
+                                No analyses yet. Start your first analysis!
+                            </p>
+                        </div>
+                        {% endif %}
+                    </div>
+                </div>
+
+                <!-- Features -->
+                <div class="dashboard-card">
+                    <div class="card-header">
+                        <h3><i class="fas fa-star"></i> <span data-en="Features" data-ar="المميزات">Features</span></h3>
+                    </div>
+                    <div class="card-content">
+                        <div class="features-grid">
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-file-pdf"></i>
+                                </div>
+                                <div class="feature-info">
+                                    <h4 data-en="PDF Analysis" data-ar="تحليل PDF">PDF Analysis</h4>
+                                    <p data-en="Extract and analyze text from PDF documents" data-ar="استخراج وتحليل النص من مستندات PDF">
+                                        Extract and analyze text from PDF documents
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-table"></i>
+                                </div>
+                                <div class="feature-info">
+                                    <h4 data-en="Excel/CSV Analysis" data-ar="تحليل Excel/CSV">Excel/CSV Analysis</h4>
+                                    <p data-en="Analyze spreadsheet data with precision" data-ar="تحليل بيانات الجداول بدقة">
+                                        Analyze spreadsheet data with precision
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-robot"></i>
+                                </div>
+                                <div class="feature-info">
+                                    <h4 data-en="AI Insights" data-ar="رؤى الذكاء الاصطناعي">AI Insights</h4>
+                                    <p data-en="Get intelligent insights from AI assistant" data-ar="احصل على رؤى ذكية من مساعد الذكاء الاصطناعي">
+                                        Get intelligent insights from AI assistant
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="feature-item">
+                                <div class="feature-icon">
+                                    <i class="fas fa-download"></i>
+                                </div>
+                                <div class="feature-info">
+                                    <h4 data-en="Multi-format Reports" data-ar="تقارير متعددة الصيغ">Multi-format Reports</h4>
+                                    <p data-en="Export reports in PDF, Excel, and CSV formats" data-ar="تصدير التقارير بصيغ PDF و Excel و CSV">
+                                        Export reports in PDF, Excel, and CSV formats
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+    /* Dashboard Styles */
+    .dashboard-container {
+        min-height: 100vh;
+        background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    }
+    
+    .dashboard-header {
+        background: linear-gradient(135deg, var(--primary) 0%, #1a3a57 100%);
+        color: white;
+        padding: 4rem 0 2rem;
+        text-align: center;
+    }
+    
+    .dashboard-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        font-weight: 700;
+    }
+    
+    .dashboard-subtitle {
+        font-size: 1.2rem;
+        max-width: 800px;
+        margin: 0 auto;
+        opacity: 0.9;
+        line-height: 1.6;
+    }
+    
+    .upload-section {
+        padding: 3rem 0;
+    }
+    
+    .upload-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        padding: 2.5rem;
+        max-width: 900px;
+        margin: 0 auto;
+    }
+    
+    .upload-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+    
+    .upload-header i {
+        font-size: 2rem;
+        color: var(--accent);
+        margin-right: 1rem;
+    }
+    
+    .upload-header h2 {
+        margin: 0;
+        color: var(--primary);
+    }
+    
+    .upload-description {
+        color: #666;
+        margin-bottom: 2rem;
+        font-size: 1.1rem;
+        line-height: 1.6;
+    }
+    
+    .dashboard-section {
+        padding: 2rem 0 4rem;
+    }
+    
+    .dashboard-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    
+    .dashboard-card {
+        background: white;
+        border-radius: 12px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+    
+    .card-header {
+        background: var(--primary);
+        color: white;
+        padding: 1.5rem;
+    }
+    
+    .card-header h3 {
+        margin: 0;
+        display: flex;
+        align-items: center;
+        font-size: 1.3rem;
+    }
+    
+    .card-header i {
+        margin-right: 0.75rem;
+    }
+    
+    .card-content {
+        padding: 1.5rem;
+    }
+    
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+    
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+    
+    .file-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: var(--primary);
+    }
+    
+    #id_files {
+        display: none;
+    }
+    
+    .file-custom {
+        display: flex;
+        align-items: center;
+        padding: 1rem;
+        border: 2px dashed #ddd;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        background: #f9f9f9;
+    }
+    
+    .file-custom:hover {
+        border-color: var(--accent);
+        background: #f0f7f7;
+    }
+    
+    .file-custom i {
+        font-size: 1.5rem;
+        color: var(--accent);
+        margin-right: 1rem;
+    }
+    
+    .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+    }
+    
+    .input-with-icon {
+        position: relative;
+        display: flex;
+        align-items: center;
+    }
+    
+    .input-with-icon i {
+        position: absolute;
+        left: 1rem;
+        color: var(--accent);
+        z-index: 1;
+    }
+    
+    .input-with-icon input, .input-with-icon select, .input-with-icon textarea {
+        width: 100%;
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 1px solid #ddd;
+        border-radius: 8px;
+        font-size: 1rem;
+        background: white;
+    }
+    
+    .form-actions {
+        display: flex;
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+    
+    .submit-btn {
+        flex: 1;
+        border: none;
+        border-radius: 8px;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+    
+    .submit-btn.primary {
+        background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+        color: white;
+    }
+    
+    .submit-btn.secondary {
+        background: transparent;
+        color: var(--primary);
+        border: 2px solid var(--primary);
+    }
+    
+    .submit-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    }
+    
+    .submit-btn.primary:hover {
+        box-shadow: 0 5px 15px rgba(40, 122, 125, 0.3);
+    }
+    
+    .submit-btn i {
+        margin-right: 0.5rem;
+    }
+    
+    .error-message {
+        background: #ffeaea;
+        color: #d32f2f;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1.5rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .error-message i {
+        margin-right: 0.5rem;
+    }
+    
+    .analysis-list {
+        display: flex;
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .analysis-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1rem;
+        border-radius: 8px;
+        border: 1px solid #eee;
+        transition: all 0.3s ease;
+        text-decoration: none;
+        color: inherit;
+    }
+    
+    .analysis-item:hover {
+        background: #f9f9f9;
+        transform: translateY(-2px);
+        box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+    }
+    
+    .analysis-info h4 {
+        margin: 0 0 0.25rem 0;
+        color: var(--primary);
+        font-size: 1rem;
+    }
+    
+    .analysis-date {
+        color: #666;
+        font-size: 0.85rem;
+    }
+    
+    .status-badge {
+        display: flex;
+        align-items: center;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 600;
+    }
+    
+    .status-badge.completed {
+        background: #e8f5e9;
+        color: #2e7d32;
+    }
+    
+    .status-badge.processing {
+        background: #fff3e0;
+        color: #ef6c00;
+    }
+    
+    .status-badge i {
+        margin-right: 0.4rem;
+    }
+    
+    .empty-state-small {
+        text-align: center;
+        padding: 2rem 1rem;
+        color: #999;
+    }
+    
+    .empty-state-small i {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: #ddd;
+    }
+    
+    .features-grid {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .feature-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .feature-icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 50px;
+        height: 50px;
+        background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+        border-radius: 10px;
+        color: white;
+        font-size: 1.25rem;
+        flex-shrink: 0;
+    }
+    
+    .feature-info h4 {
+        margin: 0 0 0.5rem 0;
+        color: var(--primary);
+        font-size: 1rem;
+    }
+    
+    .feature-info p {
+        margin: 0;
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+    
+    .form-text {
+        display: block;
+        margin-top: 0.5rem;
+        color: #666;
+        font-size: 0.9rem;
+    }
+    
+    /* RTL Support Styles */
+    body.rtl .upload-header i {
+        margin-right: 0;
+        margin-left: 1rem;
+    }
+
+    body.rtl .file-custom i {
+        margin-right: 0;
+        margin-left: 1rem;
+    }
+
+    body.rtl .input-with-icon i {
+        left: auto;
+        right: 1rem;
+    }
+
+    body.rtl .input-with-icon input, 
+    body.rtl .input-with-icon select, 
+    body.rtl .input-with-icon textarea {
+        padding: 0.75rem 3rem 0.75rem 1rem;
+    }
+
+    body.rtl .submit-btn i {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+
+    body.rtl .error-message i {
+        margin-right: 0;
+        margin-left: 0.5rem;
+    }
+
+    body.rtl .card-header h3 {
+        flex-direction: row-reverse;
+    }
+
+    body.rtl .card-header i {
+        margin-right: 0;
+        margin-left: 0.75rem;
+    }
+
+    body.rtl .status-badge i {
+        margin-right: 0;
+        margin-left: 0.4rem;
+    }
+
+    body.rtl .feature-item {
+        flex-direction: row-reverse;
+    }
+
+    /* Responsive adjustments */
+    @media (max-width: 1024px) {
+        .dashboard-grid {
+            grid-template-columns: 1fr;
+            max-width: 600px;
+        }
+    }
+    
+    @media (max-width: 768px) {
+        .dashboard-title {
+            font-size: 2rem;
+        }
+        
+        .upload-card {
+            padding: 1.5rem;
+        }
+        
+        .form-row {
+            grid-template-columns: 1fr;
+        }
+        
+        .form-actions {
+            flex-direction: column;
+        }
+        
+        .dashboard-grid {
+            gap: 1.5rem;
+        }
+        
+        /* RTL mobile adjustments */
+        body.rtl .analysis-item {
+            text-align: right;
+        }
+    }
+    
+    @media (max-width: 480px) {
+        .feature-item {
+            flex-direction: column;
+            text-align: center;
+        }
+        
+        body.rtl .feature-item {
+            flex-direction: column;
+        }
+        
+        .feature-icon {
+            align-self: center;
+        }
+    }
+</style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const form = document.getElementById('analysis-form');
+        const analyzeBtn = document.getElementById('analyze-btn');
+        const fileInput = document.getElementById('id_files');
+        const fileCustom = document.querySelector('.file-custom span');
+        const sampleDataBtn = document.getElementById('sample-data-btn');
+        
+        // Form submission handler
+        if (form) {
+            form.addEventListener('submit', function() {
+                // Show loading state
+                analyzeBtn.disabled = true;
+                analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i><span data-en="Analyzing..." data-ar="جاري التحليل...">Analyzing...</span>';
+                
+                // Update text based on current language
+                updateButtonText(analyzeBtn, 'Analyzing...', 'جاري التحليل...');
+            });
+        }
+        
+        // File input handler
+        if (fileInput) {
+            fileInput.addEventListener('change', function() {
+                const files = this.files;
+                if (files.length > 0) {
+                    const fileNames = Array.from(files).map(file => file.name).join(', ');
+                    fileCustom.textContent = fileNames;
+                    
+                    // Update button text
+                    const isRTL = document.body.classList.contains('rtl');
+                    const btnText = isRTL ? 
+                        `تحليل ${files.length} ملف` : 
+                        `Analyze ${files.length} File(s)`;
+                    analyzeBtn.querySelector('span').textContent = btnText;
+                } else {
+                    // Update text based on current language
+                    const isRTL = document.body.classList.contains('rtl');
+                    fileCustom.textContent = isRTL ? 'اختر الملفات...' : 'Choose files...';
+                    analyzeBtn.querySelector('span').textContent = isRTL ? 'بدء التحليل' : 'Start Analysis';
+                }
+            });
+        }
+        
+        // Sample data button handler
+        if (sampleDataBtn) {
+            sampleDataBtn.addEventListener('click', function() {
+                alert('Sample documents functionality would be implemented here');
+            });
+        }
+
+        // Language text update function
+        function updateTextContent() {
+            const isRTL = document.body.classList.contains('rtl');
+            const elements = document.querySelectorAll('[data-en], [data-ar]');
+            elements.forEach(element => {
+                const text = isRTL ? element.getAttribute('data-ar') : element.getAttribute('data-en');
+                if (text) element.textContent = text;
+            });
+        }
+        
+        // Update button text specifically
+        function updateButtonText(button, enText, arText) {
+            const isRTL = document.body.classList.contains('rtl');
+            const text = isRTL ? arText : enText;
+            if (button) {
+                const span = button.querySelector('span');
+                if (span) span.textContent = text;
+            }
+        }
+
+        // Initial update
+        updateTextContent();
+
+        // Listen for language changes
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.attributeName === 'class') {
+                    updateTextContent();
+                    
+                    // Also update file input text
+                    if (fileInput && fileInput.files.length === 0) {
+                        const isRTL = document.body.classList.contains('rtl');
+                        fileCustom.textContent = isRTL ? 'اختر الملفات...' : 'Choose files...';
+                    }
+                }
+            });
+        });
+
+        observer.observe(document.body, {
+            attributes: true,
+            attributeFilter: ['class']
+        });
+    });
+</script>
+{% endblock %}

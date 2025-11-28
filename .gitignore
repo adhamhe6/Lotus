@@ -1,0 +1,21 @@
+# Ignore build output directories
+/build/
+/dist/
+
+# Ignore dependency caches
+/node_modules/
+/venv/
+
+# Ignore log files
+*.log
+logs/
+
+# Ignore temporary files
+*.tmp
+
+# Ignore system-specific files
+.DS_Store
+.vscode/
+
+# Ignore specific sensitive files
+config.ini
