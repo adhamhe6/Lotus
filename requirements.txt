@@ -16,3 +16,4 @@ asyncio
 requests
 nltk
 deep-translator
+sentencepiece

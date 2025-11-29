@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'products',
     'pages',
     'accounts',
-    'paper'
+    # 'paper'
 ]
 
 MIDDLEWARE = [
@@ -138,7 +138,7 @@ DATA_UPLOAD_MAX_MEMORY_SIZE = 52428800  # 50MB
 # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 #PERPLEXITY_API_KEY
-PERPLEXITY_API_KEY = ''
+PERPLEXITY_API_KEY = os.getenv("PERPLEXITY_API_KEY")
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field

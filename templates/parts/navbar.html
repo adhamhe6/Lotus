@@ -6,20 +6,20 @@
         </div>
         <div class="nav-menu" id="nav-menu">
             <a href="{% url 'products' %}" class="nav-link text-nav-products">Products</a>
-            <a href="#services" class="nav-link text-nav-services">Services</a>
+            <a href="{% url 'services' %}" class="nav-link text-nav-services">Services</a>
             <div class="nav-link dropdown">
                 <span class="text-nav-company">Company <i class="fas fa-chevron-down"></i></span>
                 <div class="dropdown-content">
-                    <a href="#about" class="text-nav-about">About</a>
-                    <a href="#contact" class="text-nav-contact">Contact</a>
-                    <a href="#team" class="text-nav-team">Executive Team</a>
-                    <a href="#news" class="text-nav-news">Newsroom</a>
-                    <a href="#careers" class="text-nav-careers">Careers</a>
+                    <a href="{% url 'about' %}" class="text-nav-about">About</a>
+                    <a href="{% url 'contact' %}" class="text-nav-contact">Contact</a>
+                    <a href="{% url 'executive_team' %}" class="text-nav-team">Executive Team</a>
+                    <a href="{% url 'newsroom' %}" class="text-nav-news">Newsroom</a>
+                    <a href="{% url 'careers' %}" class="text-nav-careers">Careers</a>
                 </div>
             </div>
-            <a href="#industries" class="nav-link text-nav-industries">Industries</a>
-            <a href="#resources" class="nav-link text-nav-resources">Resources</a>
-            <a href="#custom" class="nav-link text-nav-design">Design Your Tool</a>
+            <a href="{% url 'industries' %}" class="nav-link text-nav-industries">Industries</a>
+            <a href="{% url 'resources' %}" class="nav-link text-nav-resources">Resources</a>
+            <a href="{% url 'design_your_tool' %}" class="nav-link text-nav-design">Design Your Tool</a>
         </div>
         <div class="nav-buttons">
             <button id="language-toggle" class="lang-btn">العربية</button>
@@ -52,7 +52,7 @@
 
                     <div class="divider"></div>
 
-                    <a href="{% url 'home' %}" class="logout">
+                    <a href="{% url 'logout' %}" class="logout">
                         <i class="fas fa-sign-out-alt"></i> Sign Out
                     </a>
                 </div>
@@ -63,8 +63,8 @@
             {% endif %}
 
             
-            <button class="buy-btn text-nav-buy">Buy</button>
-            <button class="demo-btn text-nav-demo">Request a Demo</button>
+            <button class="buy-btn text-nav-buy" onclick="location.href='{% url 'products' %}'">Buy</button>
+            <button class="demo-btn text-nav-demo" onclick="location.href='{% url 'contact' %}'">Request a Demo</button>
             <div class="search-icon" id="search-toggle">
                 <i class="fas fa-search"></i>
             </div>
@@ -81,7 +81,7 @@
 <div id="search-modal" class="modal">
     <div class="modal-content">
         <span class="close">&times;</span>
-        <form class="search-form">
+        <form class="search-form" action="{% url 'resources' %}" method="get">
             <input type="text" placeholder="Search research, analysis, tools..." name="search" class="text-search-placeholder">
             <button type="submit"><i class="fas fa-search"></i></button>
         </form>
@@ -120,6 +120,56 @@
 .signup-btn:hover {
     background: #1f8c8f;
     border-color: #1f8c8f;
+}
+
+.buy-btn, .demo-btn {
+    padding: 0.5rem 1rem;
+    border-radius: 6px;
+    border: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.buy-btn {
+    background: var(--secondary);
+    color: var(--primary);
+}
+
+.buy-btn:hover {
+    background: #d4a236;
+    transform: translateY(-2px);
+}
+
+.demo-btn {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid var(--primary);
+}
+
+.demo-btn:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+/* Active link styling */
+.nav-link.active {
+    color: var(--accent);
+    font-weight: 600;
+    position: relative;
+}
+
+.nav-link.active::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: var(--accent);
+    border-radius: 1px;
 }
 
 .user-dropdown {
@@ -237,11 +287,16 @@ body.rtl .dropdown-item {
         font-size: 0.8rem;
     }
     
+    .buy-btn, .demo-btn {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.8rem;
+    }
+    
     .user-name {
         display: none;
     }
 }
-{% comment %} {% endcomment %}
+
 /* -----------------------------------------------------------
    USER NAV STYLE — Matches Lotus Navbar
 ------------------------------------------------------------ */
@@ -355,46 +410,214 @@ body.rtl .nav-user-dropdown {
 /* Highlight the dropdown box when visible */
 .nav-user:hover .nav-user-dropdown {
     display: block;
-    border: 2px solid var(--primary); /* Adds colored border */
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25); /* Stronger shadow */
-    background: #fff; /* Ensure background stays white */
+    border: 2px solid var(--primary);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+    background: #fff;
 }
 
+/* Search Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: #fefefe;
+    margin: 15% auto;
+    padding: 2rem;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+}
+
+.close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: var(--primary);
+}
+
+.search-form {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.search-form input {
+    flex: 1;
+    padding: 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+}
+
+.search-form button {
+    background: var(--accent);
+    color: white;
+    border: none;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.search-form button:hover {
+    background: #1f8c8f;
+}
+
+/* Mobile menu styles */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.bar {
+    width: 25px;
+    height: 3px;
+    background-color: var(--primary);
+    margin: 3px 0;
+    transition: 0.3s;
+}
+
+@media (max-width: 768px) {
+    .hamburger {
+        display: flex;
+    }
+    
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        flex-direction: column;
+        padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    }
+    
+    .nav-menu.active {
+        display: flex;
+    }
+    
+    .nav-buttons {
+        display: none;
+    }
+    
+    .nav-buttons.active {
+        display: flex;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background: white;
+        padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        gap: 0.5rem;
+    }
+}
 </style>
 
 <script>
-// Add user dropdown functionality
 document.addEventListener('DOMContentLoaded', function() {
-    const userDropdowns = document.querySelectorAll('.user-dropdown');
+    // User dropdown functionality
+    const userBtn = document.querySelector('.nav-user-btn');
+    const userDropdown = document.querySelector('.nav-user-dropdown');
     
-    userDropdowns.forEach(dropdown => {
-        dropdown.addEventListener('click', function(e) {
+    if (userBtn && userDropdown) {
+        userBtn.addEventListener('click', function(e) {
             e.stopPropagation();
+            userDropdown.style.display = userDropdown.style.display === 'block' ? 'none' : 'block';
         });
-    });
+        
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            userDropdown.style.display = 'none';
+        });
+    }
     
-    // Close dropdown when clicking outside
-    document.addEventListener('click', function() {
-        userDropdowns.forEach(dropdown => {
-            const content = dropdown.querySelector('.user-dropdown-content');
-            if (content) {
-                content.style.display = 'none';
+    // Search modal functionality
+    const searchToggle = document.getElementById('search-toggle');
+    const searchModal = document.getElementById('search-modal');
+    const closeBtn = document.querySelector('.close');
+    
+    if (searchToggle && searchModal) {
+        searchToggle.addEventListener('click', function() {
+            searchModal.style.display = 'block';
+        });
+        
+        if (closeBtn) {
+            closeBtn.addEventListener('click', function() {
+                searchModal.style.display = 'none';
+            });
+        }
+        
+        // Close modal when clicking outside
+        window.addEventListener('click', function(event) {
+            if (event.target === searchModal) {
+                searchModal.style.display = 'none';
             }
         });
-    });
-});
-{% comment %}  {% endcomment %}
-document.addEventListener("click", function (e) {
-    const userMenu = document.querySelector(".nav-user-dropdown");
-    const userBtn = document.querySelector(".nav-user-btn");
-
-    if (!userMenu || !userBtn) return;
-
-    if (userBtn.contains(e.target)) {
-        userMenu.style.display = userMenu.style.display === "block" ? "none" : "block";
-    } else {
-        userMenu.style.display = "none";
+    }
+    
+    // Mobile menu functionality
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('nav-menu');
+    const navButtons = document.querySelector('.nav-buttons');
+    
+    if (hamburger && navMenu) {
+        hamburger.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            if (navButtons) {
+                navButtons.classList.toggle('active');
+            }
+            hamburger.classList.toggle('active');
+        });
+    }
+    
+    // Set active link based on current page
+    function setActiveLink() {
+        const currentPath = window.location.pathname;
+        const navLinks = document.querySelectorAll('.nav-link');
+        
+        navLinks.forEach(link => {
+            const linkPath = link.getAttribute('href');
+            if (linkPath && currentPath.includes(linkPath.replace('/', ''))) {
+                link.classList.add('active');
+            } else {
+                link.classList.remove('active');
+            }
+        });
+    }
+    
+    setActiveLink();
+    
+    // Language toggle functionality
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            const currentLang = this.textContent;
+            this.textContent = currentLang === 'العربية' ? 'English' : 'العربية';
+            document.body.classList.toggle('rtl');
+            
+            // You can add actual language switching logic here
+            // For now, we're just toggling the RTL class for demo
+        });
     }
 });
-
 </script>

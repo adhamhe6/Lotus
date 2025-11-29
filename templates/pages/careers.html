@@ -1,0 +1,608 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="careers-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Join Our Team</h1>
+            <p>Build the future of qualitative data analysis with us</p>
+            <a href="#open-positions" class="cta-button">View Open Positions</a>
+        </div>
+    </section>
+
+    <!-- Why Work With Us -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Culture</span>
+                <h2>Why Lotus Platform?</h2>
+                <p>We're building more than just software - we're advancing the field of qualitative research through technology.</p>
+                
+                <div class="benefits-grid">
+                    <div class="benefit-item">
+                        <i class="fas fa-bullseye"></i>
+                        <h4>Mission-Driven Work</h4>
+                        <p>Work on meaningful projects that impact research and education worldwide</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-users"></i>
+                        <h4>Collaborative Environment</h4>
+                        <p>Join a diverse team of experts who support and learn from each other</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-rocket"></i>
+                        <h4>Growth Opportunities</h4>
+                        <p>Continuous learning and professional development in cutting-edge technologies</p>
+                    </div>
+                    <div class="benefit-item">
+                        <i class="fas fa-heart"></i>
+                        <h4>Great Benefits</h4>
+                        <p>Competitive compensation, health insurance, and flexible work arrangements</p>
+                    </div>
+                </div>
+            </div>
+            <div class="section-img">
+                <img src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Our Team Culture" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Open Positions -->
+    <section id="open-positions" class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Opportunities</span>
+                <h2>Open Positions</h2>
+                <p>Explore current opportunities to join our growing team</p>
+                
+                <div class="positions-filter">
+                    <button class="filter-btn active" data-filter="all">All Positions</button>
+                    <button class="filter-btn" data-filter="engineering">Engineering</button>
+                    <button class="filter-btn" data-filter="research">Research</button>
+                    <button class="filter-btn" data-filter="product">Product</button>
+                    <button class="filter-btn" data-filter="business">Business</button>
+                </div>
+            </div>
+            
+            <div class="positions-grid">
+                <!-- Engineering Positions -->
+                <div class="position-card" data-department="engineering">
+                    <div class="position-header">
+                        <h3>Senior AI Engineer</h3>
+                        <span class="position-type">Full-time</span>
+                    </div>
+                    <div class="position-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote / San Francisco</span>
+                        <span><i class="fas fa-briefcase"></i> Engineering</span>
+                    </div>
+                    <p class="position-desc">Develop and implement cutting-edge AI algorithms for natural language processing and qualitative data analysis.</p>
+                    <div class="position-tags">
+                        <span class="tag">Python</span>
+                        <span class="tag">TensorFlow</span>
+                        <span class="tag">NLP</span>
+                        <span class="tag">Machine Learning</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+
+                <div class="position-card" data-department="engineering">
+                    <div class="position-header">
+                        <h3>Full Stack Developer</h3>
+                        <span class="position-type">Full-time</span>
+                    </div>
+                    <div class="position-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote / New York</span>
+                        <span><i class="fas fa-briefcase"></i> Engineering</span>
+                    </div>
+                    <p class="position-desc">Build scalable web applications and user interfaces for our qualitative analysis platform.</p>
+                    <div class="position-tags">
+                        <span class="tag">React</span>
+                        <span class="tag">Node.js</span>
+                        <span class="tag">Python</span>
+                        <span class="tag">AWS</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+
+                <!-- Research Positions -->
+                <div class="position-card" data-department="research">
+                    <div class="position-header">
+                        <h3>Research Methodologist</h3>
+                        <span class="position-type">Full-time</span>
+                    </div>
+                    <div class="position-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote / Boston</span>
+                        <span><i class="fas fa-briefcase"></i> Research</span>
+                    </div>
+                    <p class="position-desc">Design and validate qualitative research methodologies integrated into our analysis tools.</p>
+                    <div class="position-tags">
+                        <span class="tag">Qualitative Methods</span>
+                        <span class="tag">Research Design</span>
+                        <span class="tag">Academic Research</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+
+                <!-- Product Positions -->
+                <div class="position-card" data-department="product">
+                    <div class="position-header">
+                        <h3>Product Manager</h3>
+                        <span class="position-type">Full-time</span>
+                    </div>
+                    <div class="position-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> San Francisco</span>
+                        <span><i class="fas fa-briefcase"></i> Product</span>
+                    </div>
+                    <p class="position-desc">Lead product strategy and development for our qualitative analysis platform.</p>
+                    <div class="position-tags">
+                        <span class="tag">Product Strategy</span>
+                        <span class="tag">User Research</span>
+                        <span class="tag">Agile</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+
+                <!-- Business Positions -->
+                <div class="position-card" data-department="business">
+                    <div class="position-header">
+                        <h3>Business Development Manager</h3>
+                        <span class="position-type">Full-time</span>
+                    </div>
+                    <div class="position-meta">
+                        <span><i class="fas fa-map-marker-alt"></i> Remote</span>
+                        <span><i class="fas fa-briefcase"></i> Business</span>
+                    </div>
+                    <p class="position-desc">Expand our partnerships with academic institutions and research organizations.</p>
+                    <div class="position-tags">
+                        <span class="tag">Sales</span>
+                        <span class="tag">Partnerships</span>
+                        <span class="tag">Higher Education</span>
+                    </div>
+                    <a href="#" class="apply-btn">Apply Now</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Application Process -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Process</span>
+                <h2>Our Hiring Process</h2>
+                <p>We've designed a transparent and respectful process to help you showcase your skills</p>
+                
+                <div class="process-steps">
+                    <div class="process-step">
+                        <div class="step-number">1</div>
+                        <h4>Application Review</h4>
+                        <p>We carefully review every application and respond within 1-2 weeks</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">2</div>
+                        <h4>Initial Interview</h4>
+                        <p>30-minute video call with our hiring team to discuss your background and interests</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">3</div>
+                        <h4>Skills Assessment</h4>
+                        <p>Practical exercise relevant to the role (take-home or pair programming)</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">4</div>
+                        <h4>Team Interviews</h4>
+                        <p>Meet with potential teammates and managers in 2-3 additional interviews</p>
+                    </div>
+                    <div class="process-step">
+                        <div class="step-number">5</div>
+                        <h4>Offer</h4>
+                        <p>We make an offer and work with you to ensure a smooth onboarding process</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Employee Testimonials -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Team Voices</span>
+                <h2>Hear From Our Team</h2>
+                
+                <div class="testimonials-grid">
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"The opportunity to work on cutting-edge AI while making a real impact in academic research drew me to Lotus. The collaborative culture and commitment to excellence make every day rewarding."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Alex Chen">
+                            <div>
+                                <h4>Alex Chen</h4>
+                                <p>Senior AI Engineer, 2 years at Lotus</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="testimonial-card">
+                        <div class="testimonial-content">
+                            <p>"What I love about Lotus is how we bridge the gap between technical innovation and real research needs. Our work directly helps researchers uncover insights that can change their fields."</p>
+                        </div>
+                        <div class="testimonial-author">
+                            <img src="https://images.unsplash.com/photo-1494790108755-2616b612b786?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80" alt="Sarah Johnson">
+                            <div>
+                                <h4>Sarah Johnson</h4>
+                                <p>Research Methodologist, 1 year at Lotus</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.careers-hero {
+    position: relative;
+    height: 60vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: var(--secondary);
+    color: var(--primary);
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(229, 180, 65, 0.3);
+}
+
+.benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.benefit-item {
+    text-align: center;
+    padding: 2rem 1rem;
+}
+
+.benefit-item i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.benefit-item h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.2rem;
+}
+
+.benefit-item p {
+    color: #666;
+    line-height: 1.6;
+}
+
+.positions-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin: 2rem 0;
+}
+
+.filter-btn {
+    background: white;
+    border: 2px solid #e1e5e9;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    color: #666;
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active,
+.filter-btn:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+.positions-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.position-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid var(--accent);
+}
+
+.position-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.position-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+}
+
+.position-header h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin: 0;
+}
+
+.position-type {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.position-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.position-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.position-desc {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.position-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.tag {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.apply-btn {
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.apply-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 122, 125, 0.3);
+}
+
+.process-steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.process-step {
+    text-align: center;
+    padding: 1.5rem;
+}
+
+.step-number {
+    width: 50px;
+    height: 50px;
+    background: var(--primary);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 auto 1rem;
+}
+
+.process-step h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.process-step p {
+    color: #666;
+    font-size: 0.9rem;
+    line-height: 1.5;
+}
+
+.testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.testimonial-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.testimonial-content {
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-content p {
+    color: #666;
+    font-style: italic;
+    line-height: 1.6;
+    margin: 0;
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.testimonial-author img {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.testimonial-author h4 {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+}
+
+.testimonial-author p {
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .positions-filter {
+        justify-content: center;
+    }
+    
+    .positions-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .position-header {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .process-steps {
+        grid-template-columns: 1fr;
+    }
+    
+    .testimonials-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const positionCards = document.querySelectorAll('.position-card');
+    
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            const filter = this.getAttribute('data-filter');
+            
+            // Update active button
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Filter positions
+            positionCards.forEach(card => {
+                if (filter === 'all' || card.getAttribute('data-department') === filter) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
+</script>
+{% endblock %}

@@ -1,0 +1,256 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="blog-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 data-en="Research Blog" data-ar="مدونة البحث">Research Blog</h1>
+            <p data-en="Insights, methodologies, and latest trends in qualitative data analysis"
+               data-ar="رؤى ومنهجيات وأحدث الاتجاهات في تحليل البيانات النوعية">
+               Insights, methodologies, and latest trends in qualitative data analysis
+            </p>
+        </div>
+    </section>
+
+    <!-- Blog Posts -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag" data-en="Latest Articles" data-ar="أحدث المقالات">Latest Articles</span>
+                <h2 data-en="From Our Research Team" data-ar="من فريقنا البحثي">From Our Research Team</h2>
+            </div>
+        </div>
+
+        <div class="blog-grid">
+            <!-- Blog Post 1 -->
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="AI in Qualitative Research">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date" data-en="March 15, 2024" data-ar="15 مارس 2024">March 15, 2024</span>
+                        <span class="blog-category" data-en="Methodology" data-ar="المنهجية">Methodology</span>
+                    </div>
+                    <h3 data-en="The Future of AI in Qualitative Research" data-ar="مستقبل الذكاء الاصطناعي في البحث النوعي">The Future of AI in Qualitative Research</h3>
+                    <p data-en="Exploring how artificial intelligence is transforming traditional qualitative research methods and opening new possibilities for data analysis."
+                       data-ar="استكشاف كيف يحول الذكاء الاصطناعي طرق البحث النوعي التقليدية ويفتح إمكانيات جديدة لتحليل البيانات.">
+                       How AI is transforming traditional qualitative research methods
+                    </p>
+                    <a href="#" class="read-more" data-en="Read More" data-ar="اقرأ المزيد">Read More</a>
+                </div>
+            </article>
+
+            <!-- Blog Post 2 -->
+            <article class="blog-card">
+                <div class="blog-image">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Data Visualization">
+                </div>
+                <div class="blog-content">
+                    <div class="blog-meta">
+                        <span class="blog-date" data-en="March 10, 2024" data-ar="10 مارس 2024">March 10, 2024</span>
+                        <span class="blog-category" data-en="Visualization" data-ar="التصور">Visualization</span>
+                    </div>
+                    <h3 data-en="Effective Data Visualization Techniques" data-ar="تقنيات فعالة لتصور البيانات">Effective Data Visualization Techniques</h3>
+                    <p data-en="Best practices for creating compelling visualizations that communicate complex research findings clearly and effectively."
+                       data-ar="أفضل الممارسات لإنشاء تصورات مقنعة تنقل نتائج البحث المعقدة بوضوح وفعالية.">
+                       Best practices for communicating complex research findings
+                    </p>
+                    <a href="#" class="read-more" data-en="Read More" data-ar="اقرأ المزيد">Read More</a>
+                </div>
+            </article>
+        </div>
+    </section>
+</div>
+
+<style>
+.blog-hero {
+    position: relative;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+}
+
+.blog-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.blog-card:hover {
+    transform: translateY(-5px);
+}
+
+.blog-image {
+    height: 250px;
+    overflow: hidden;
+}
+
+.blog-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.blog-card:hover .blog-image img {
+    transform: scale(1.05);
+}
+
+.blog-content {
+    padding: 2rem;
+}
+
+.blog-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.blog-date {
+    color: #666;
+}
+
+.blog-category {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-weight: 600;
+}
+
+.blog-content h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.blog-content p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.read-more {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.read-more:hover {
+    gap: 1rem;
+}
+
+/* RTL Support */
+body.rtl .section-text {
+    text-align: right;
+}
+
+body.rtl .blog-meta {
+    flex-direction: row-reverse;
+}
+
+body.rtl .read-more {
+    flex-direction: row-reverse;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .blog-grid {
+        grid-template-columns: 1fr;
+        padding: 0 1rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language switching functionality
+    function updateLanguage() {
+        const isRTL = document.body.classList.contains('rtl');
+        const elements = document.querySelectorAll('[data-en][data-ar]');
+        
+        elements.forEach(element => {
+            if (isRTL) {
+                element.textContent = element.getAttribute('data-ar');
+            } else {
+                element.textContent = element.getAttribute('data-en');
+            }
+        });
+    }
+
+    // Initial language update
+    updateLanguage();
+
+    // Listen for language changes
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            setTimeout(updateLanguage, 100);
+        });
+    }
+});
+</script>
+{% endblock %}

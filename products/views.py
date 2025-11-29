@@ -617,6 +617,29 @@ def paper_analysis_dashboard(request):
     return render(request, 'products/paper_analysis_dashboard.html', context)
     
 
+#========================simple test content_analyzer====================
+@login_required
+def test_perplexity_api(request):
+    """Test view to verify Perplexity API connection"""
+    if request.method == 'POST':
+        test_message = request.POST.get('test_message', 'Hello, are you working?')
+        
+        try:
+            response = chat_with_perplexity(test_message)
+            
+            return JsonResponse({
+                'status': 'success',
+                'test_message': test_message,
+                'api_response': response,
+                'api_key_set': bool(settings.PERPLEXITY_API_KEY)
+            })
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'error': str(e)
+            })
+    
+    return render(request, 'content_analyzer/test_api.html')
 #========================content_analyzer====================
 
 @login_required
@@ -697,7 +720,7 @@ def content_analyzer_home(request):
 
 @login_required
 def content_analysis_results(request, analysis_id):
-    """Display analysis results"""
+    """Display analysis results with AI insights"""
     analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
     
     if not analysis.is_completed:
@@ -709,142 +732,166 @@ def content_analysis_results(request, analysis_id):
     results = analysis.get_results()
     file_contents = analysis.get_file_contents()
     
+    # Get AI insights for the analysis
+    ai_insights = None
+    if results and results.get('summary'):
+        try:
+            # Create a summary prompt for AI insights
+            keywords_summary = ", ".join([f"{item['keyword']} ({item['count']} occurrences)" 
+                                        for item in results['summary'][:5]])
+            
+            insight_prompt = f"""
+            Based on this keyword analysis: {keywords_summary}
+            Total files analyzed: {results.get('total_files', 0)}
+            
+            Please provide brief insights about:
+            1. The most prominent themes
+            2. Any interesting patterns in keyword distribution
+            3. Suggestions for further analysis
+            """
+            
+            ai_insights = chat_with_perplexity(insight_prompt)
+        except Exception as e:
+            # Don't fail the whole page if AI insights fail
+            ai_insights = f"AI insights temporarily unavailable: {str(e)}"
+    
     return render(request, 'content_analyzer/results.html', {
         'analysis': analysis,
         'results': results,
-        'file_contents': file_contents
+        'file_contents': file_contents,
+        'ai_insights': ai_insights
     })
 
-@login_required
-def download_report(request, analysis_id, report_type):
-    """Download analysis report"""
-    analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
+# @login_required
+# def download_report(request, analysis_id, report_type):
+#     """Download analysis report"""
+#     analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
     
-    if not analysis.is_completed:
-        return HttpResponse("Analysis not completed", status=400)
+#     if not analysis.is_completed:
+#         return HttpResponse("Analysis not completed", status=400)
     
-    results = analysis.get_results()
-    language = analysis.report_language
+#     results = analysis.get_results()
+#     language = analysis.report_language
     
-    try:
-        if report_type == 'pdf':
-            buffer = create_pdf_report(results, language)
-            response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
-            response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.pdf"'
+#     try:
+#         if report_type == 'pdf':
+#             buffer = create_pdf_report(results, language)
+#             response = HttpResponse(buffer.getvalue(), content_type='application/pdf')
+#             response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.pdf"'
             
-        elif report_type == 'excel':
-            buffer = create_excel_report(results, language)
-            response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
-            response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.xlsx"'
+#         elif report_type == 'excel':
+#             buffer = create_excel_report(results, language)
+#             response = HttpResponse(buffer.getvalue(), content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+#             response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.xlsx"'
             
-        elif report_type == 'csv':
-            buffer = create_csv_report(results, language)
-            response = HttpResponse(buffer.getvalue(), content_type='text/csv')
-            response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.csv"'
+#         elif report_type == 'csv':
+#             buffer = create_csv_report(results, language)
+#             response = HttpResponse(buffer.getvalue(), content_type='text/csv')
+#             response['Content-Disposition'] = f'attachment; filename="content_analysis_{analysis.id}_{language}.csv"'
             
-        else:
-            return HttpResponse("Invalid report type", status=400)
+#         else:
+#             return HttpResponse("Invalid report type", status=400)
         
-        # Save report record
-        report = GeneratedReport.objects.create(
-            analysis=analysis,
-            report_type=report_type,
-            language=language
-        )
+#         # Save report record
+#         report = GeneratedReport.objects.create(
+#             analysis=analysis,
+#             report_type=report_type,
+#             language=language
+#         )
         
-        # For now, we're generating on-the-fly, so we don't save the file
-        # In production, you might want to save the file to the report_file field
+#         # For now, we're generating on-the-fly, so we don't save the file
+#         # In production, you might want to save the file to the report_file field
         
-        return response
+#         return response
         
-    except Exception as e:
-        return HttpResponse(f"Error generating report: {str(e)}", status=500)
+#     except Exception as e:
+#         return HttpResponse(f"Error generating report: {str(e)}", status=500)
 
-@login_required
-@require_POST
-@csrf_exempt
-def chat_with_ai(request, analysis_id):
-    """Chat with AI about analysis"""
-    analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
+# @login_required
+# @require_POST
+# @csrf_exempt
+# def chat_with_ai(request, analysis_id):
+#     """Chat with AI about analysis"""
+#     analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
     
-    message = request.POST.get('message', '').strip()
-    if not message:
-        return JsonResponse({'error': 'No message provided'}, status=400)
+#     message = request.POST.get('message', '').strip()
+#     if not message:
+#         return JsonResponse({'error': 'No message provided'}, status=400)
     
-    try:
-        # Get conversation history
-        chat_history = []
-        previous_messages = ChatMessage.objects.filter(analysis=analysis).order_by('created_at')
-        for msg in previous_messages:
-            chat_history.append({
-                "role": msg.role,
-                "content": msg.content
-            })
+#     try:
+#         # Get conversation history
+#         chat_history = []
+#         previous_messages = ChatMessage.objects.filter(analysis=analysis).order_by('created_at')
+#         for msg in previous_messages:
+#             chat_history.append({
+#                 "role": msg.role,
+#                 "content": msg.content
+#             })
         
-        # Save user message
-        user_message = ChatMessage.objects.create(
-            analysis=analysis,
-            role='user',
-            content=message
-        )
+#         # Save user message
+#         user_message = ChatMessage.objects.create(
+#             analysis=analysis,
+#             role='user',
+#             content=message
+#         )
         
-        # Get AI response
-        response = chat_with_perplexity(message, chat_history)
+#         # Get AI response
+#         response = chat_with_perplexity(message, chat_history)
         
-        # Save AI response
-        ai_message = ChatMessage.objects.create(
-            analysis=analysis,
-            role='assistant',
-            content=response
-        )
+#         # Save AI response
+#         ai_message = ChatMessage.objects.create(
+#             analysis=analysis,
+#             role='assistant',
+#             content=response
+#         )
         
-        return JsonResponse({
-            'user_message': message,
-            'ai_response': response,
-            'timestamp': timezone.now().isoformat()
-        })
+#         return JsonResponse({
+#             'user_message': message,
+#             'ai_response': response,
+#             'timestamp': timezone.now().isoformat()
+#         })
         
-    except Exception as e:
-        return JsonResponse({'error': str(e)}, status=500)
+#     except Exception as e:
+#         return JsonResponse({'error': str(e)}, status=500)
 
-@login_required
-def get_chat_history(request, analysis_id):
-    """Get chat history for an analysis"""
-    analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
+# @login_required
+# def get_chat_history(request, analysis_id):
+#     """Get chat history for an analysis"""
+#     analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
     
-    messages = ChatMessage.objects.filter(analysis=analysis).order_by('created_at')
+#     messages = ChatMessage.objects.filter(analysis=analysis).order_by('created_at')
     
-    chat_data = []
-    for msg in messages:
-        chat_data.append({
-            'role': msg.role,
-            'content': msg.content,
-            'timestamp': msg.created_at.isoformat()
-        })
+#     chat_data = []
+#     for msg in messages:
+#         chat_data.append({
+#             'role': msg.role,
+#             'content': msg.content,
+#             'timestamp': msg.created_at.isoformat()
+#         })
     
-    return JsonResponse({'messages': chat_data})
+#     return JsonResponse({'messages': chat_data})
 
-@login_required
-def analysis_history(request):
-    """View analysis history"""
-    analyses = ContentAnalysis.objects.filter(user=request.user).order_by('-created_at')
+# @login_required
+# def analysis_history(request):
+#     """View analysis history"""
+#     analyses = ContentAnalysis.objects.filter(user=request.user).order_by('-created_at')
     
-    return render(request, 'content_analyzer/history.html', {
-        'analyses': analyses
-    })
+#     return render(request, 'content_analyzer/history.html', {
+#         'analyses': analyses
+#     })
 
-@login_required
-def delete_analysis(request, analysis_id):
-    """Delete an analysis"""
-    analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
+# @login_required
+# def delete_analysis(request, analysis_id):
+#     """Delete an analysis"""
+#     analysis = get_object_or_404(ContentAnalysis, id=analysis_id, user=request.user)
     
-    if request.method == 'POST':
-        analysis.delete()
-        return redirect('content_analysis_history')
+#     if request.method == 'POST':
+#         analysis.delete()
+#         return redirect('content_analysis_history')
     
-    return render(request, 'content_analyzer/confirm_delete.html', {
-        'analysis': analysis
-    })
+#     return render(request, 'content_analyzer/confirm_delete.html', {
+#         'analysis': analysis
+#     })
 
 
 # #=================updated to use local ai============

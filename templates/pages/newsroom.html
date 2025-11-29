@@ -1,0 +1,579 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="newsroom-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Newsroom</h1>
+            <p>Latest updates, press releases, and media coverage</p>
+        </div>
+    </section>
+
+    <!-- Featured News -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Featured</span>
+                <h2>Latest Updates</h2>
+                
+                <div class="featured-news">
+                    <div class="featured-card">
+                        <div class="news-image">
+                            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Product Launch">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">Product Launch</span>
+                                <span class="news-date">March 15, 2024</span>
+                            </div>
+                            <h3>Lotus Platform Unveils Next-Generation AI Analysis Tools</h3>
+                            <p>We're excited to announce the launch of our enhanced AI-powered analysis suite, featuring advanced natural language processing and real-time collaboration capabilities.</p>
+                            <a href="#" class="read-more">Read Full Story <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Grid -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-header">
+                <h2>Recent News & Announcements</h2>
+                <p>Stay updated with our latest developments and achievements</p>
+            </div>
+
+            <div class="news-grid">
+                <!-- News 1 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Partnership Announcement">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Partnership</span>
+                            <span class="news-date">February 28, 2024</span>
+                        </div>
+                        <h3>Lotus Partners with Leading Research Universities</h3>
+                        <p>New collaboration with top academic institutions to advance qualitative research methodology and tool development.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- News 2 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Award News">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Award</span>
+                            <span class="news-date">February 15, 2024</span>
+                        </div>
+                        <h3>Lotus Wins Innovation in Research Technology Award</h3>
+                        <p>Recognized for groundbreaking contributions to qualitative data analysis and research methodology innovation.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- News 3 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1521737711867-e3b97375f902?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Research Publication">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Research</span>
+                            <span class="news-date">January 30, 2024</span>
+                        </div>
+                        <h3>New Research Paper Published on AI-Assisted Qualitative Analysis</h3>
+                        <p>Our team publishes groundbreaking research on the effectiveness of AI in enhancing qualitative research outcomes.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- News 4 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Event Announcement">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Event</span>
+                            <span class="news-date">January 20, 2024</span>
+                        </div>
+                        <h3>Join Us at the International Research Methods Conference</h3>
+                        <p>We'll be presenting our latest tools and hosting workshops at the premier research methodology event of the year.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- News 5 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1553028826-f4804a6dba3b?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Funding News">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Funding</span>
+                            <span class="news-date">January 10, 2024</span>
+                        </div>
+                        <h3>Lotus Secures $10M in Series B Funding</h3>
+                        <p>New investment to accelerate product development and expand global operations in research technology.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+
+                <!-- News 6 -->
+                <div class="news-card">
+                    <div class="news-image">
+                        <img src="https://images.unsplash.com/photo-1551836026-d5c88ac5c4d1?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Team Expansion">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta">
+                            <span class="news-category">Company</span>
+                            <span class="news-date">December 15, 2023</span>
+                        </div>
+                        <h3>Lotus Expands Research Team with Top Talent</h3>
+                        <p>Welcoming leading experts in qualitative methodology and AI research to our growing team of innovators.</p>
+                        <a href="#" class="read-more">Read More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="load-more-container">
+                <button class="btn-load-more">Load More News</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Press Kit -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Media Resources</span>
+                <h2>Press Kit</h2>
+                <p>Resources for journalists and media professionals</p>
+                
+                <div class="press-kit-grid">
+                    <div class="press-resource">
+                        <i class="fas fa-download"></i>
+                        <h4>Company Logo Pack</h4>
+                        <p>High-resolution logos in various formats</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="press-resource">
+                        <i class="fas fa-file-alt"></i>
+                        <h4>Company Fact Sheet</h4>
+                        <p>Key information and statistics</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="press-resource">
+                        <i class="fas fa-images"></i>
+                        <h4>Product Screenshots</h4>
+                        <p>High-quality product images</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                    <div class="press-resource">
+                        <i class="fas fa-user-tie"></i>
+                        <h4>Executive Bios & Photos</h4>
+                        <p>Leadership team information</p>
+                        <a href="#" class="download-btn">Download</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Contact -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Contact</span>
+                <h2>Media Inquiries</h2>
+                <p>For press and media inquiries, please contact our communications team</p>
+                
+                <div class="media-contact">
+                    <div class="contact-info">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>Email</h4>
+                            <p>press@lotusplatform.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Phone</h4>
+                            <p>+1 (555) 123-PRESS</p>
+                        </div>
+                    </div>
+                    <div class="contact-info">
+                        <i class="fas fa-clock"></i>
+                        <div>
+                            <h4>Response Time</h4>
+                            <p>Within 24 hours for urgent inquiries</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.newsroom-hero {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.featured-news {
+    margin-top: 2rem;
+}
+
+.featured-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+    display: flex;
+}
+
+.featured-card .news-image {
+    flex: 0 0 400px;
+    overflow: hidden;
+}
+
+.featured-card .news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.featured-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.featured-card .news-content {
+    flex: 1;
+    padding: 2.5rem;
+}
+
+.news-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: center;
+}
+
+.news-category {
+    background: var(--accent);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.news-date {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+.featured-card h3 {
+    color: var(--primary);
+    font-size: 1.8rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.featured-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 1.1rem;
+}
+
+.read-more {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.read-more:hover {
+    gap: 1rem;
+}
+
+.news-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.news-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.news-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.news-card .news-image {
+    height: 200px;
+    overflow: hidden;
+}
+
+.news-card .news-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.news-card:hover .news-image img {
+    transform: scale(1.05);
+}
+
+.news-card .news-content {
+    padding: 1.5rem;
+}
+
+.news-card h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+}
+
+.news-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.load-more-container {
+    text-align: center;
+    margin-top: 3rem;
+}
+
+.btn-load-more {
+    background: var(--primary);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-load-more:hover {
+    background: #0a1f2f;
+    transform: translateY(-2px);
+}
+
+.press-kit-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.press-resource {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.press-resource:hover {
+    transform: translateY(-5px);
+}
+
+.press-resource i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.press-resource h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.2rem;
+}
+
+.press-resource p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.download-btn {
+    background: var(--primary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: 6px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: inline-block;
+}
+
+.download-btn:hover {
+    background: #0a1f2f;
+    transform: translateY(-2px);
+}
+
+.media-contact {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.contact-info {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.contact-info i {
+    font-size: 1.5rem;
+    color: var(--accent);
+}
+
+.contact-info h4 {
+    color: var(--primary);
+    margin-bottom: 0.25rem;
+    font-size: 1.1rem;
+}
+
+.contact-info p {
+    color: #666;
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .featured-card {
+        flex-direction: column;
+    }
+    
+    .featured-card .news-image {
+        flex: 0 0 250px;
+    }
+    
+    .featured-card .news-content {
+        padding: 2rem;
+    }
+    
+    .featured-card h3 {
+        font-size: 1.5rem;
+    }
+    
+    .news-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .press-kit-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .media-contact {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const loadMoreBtn = document.querySelector('.btn-load-more');
+    
+    if (loadMoreBtn) {
+        loadMoreBtn.addEventListener('click', function() {
+            // Simulate loading more news
+            this.textContent = 'Loading...';
+            this.disabled = true;
+            
+            setTimeout(() => {
+                this.textContent = 'No More News';
+                this.style.opacity = '0.6';
+            }, 1000);
+        });
+    }
+});
+</script>
+{% endblock %}

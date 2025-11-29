@@ -1,0 +1,863 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="design-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Design Your Custom Tool</h1>
+            <p>Tell us about your research needs and we'll create a tailored solution just for you</p>
+        </div>
+    </section>
+
+    <!-- Design Process -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Custom Development</span>
+                <h2>Your Vision, Our Expertise</h2>
+                <p>We specialize in creating custom analysis tools that perfectly match your research methodology and workflow requirements.</p>
+                
+                <div class="process-highlights">
+                    <div class="highlight">
+                        <i class="fas fa-lightbulb"></i>
+                        <div>
+                            <h4>Concept Development</h4>
+                            <p>We work with you to understand your unique research challenges and objectives</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-pencil-ruler"></i>
+                        <div>
+                            <h4>Custom Design</h4>
+                            <p>Our experts design a solution tailored to your specific methodology and workflow</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-code"></i>
+                        <div>
+                            <h4>Agile Development</h4>
+                            <p>We build your tool using an iterative approach with regular feedback sessions</p>
+                        </div>
+                    </div>
+                    <div class="highlight">
+                        <i class="fas fa-rocket"></i>
+                        <div>
+                            <h4>Launch & Support</h4>
+                            <p>Full implementation support and ongoing maintenance for your custom tool</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="section-img">
+                <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Custom Tool Design" loading="lazy">
+            </div>
+        </div>
+    </section>
+
+    <!-- Custom Tool Form -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Get Started</span>
+                <h2>Tell Us About Your Needs</h2>
+                <p>Fill out this detailed form to help us understand your requirements. The more information you provide, the better we can design your ideal solution.</p>
+                
+                <div class="form-info">
+                    <h4>What to Expect:</h4>
+                    <ul>
+                        <li>Initial consultation within 24 hours</li>
+                        <li>Preliminary proposal in 3-5 business days</li>
+                        <li>Transparent pricing and timeline</li>
+                        <li>Ongoing collaboration throughout development</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="section-img">
+                <div class="design-form-container">
+                    <form class="design-form" method="post">
+                        {% csrf_token %}
+                        <h3>Custom Tool Request</h3>
+                        
+                        <!-- Contact Information -->
+                        <div class="form-section">
+                            <h4>Contact Information</h4>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="full_name">Full Name *</label>
+                                    <input type="text" id="full_name" name="full_name" required placeholder="Enter your full name">
+                                </div>
+                                <div class="form-group">
+                                    <label for="organization">Organization *</label>
+                                    <input type="text" id="organization" name="organization" required placeholder="Your organization name">
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email Address *</label>
+                                    <input type="email" id="email" name="email" required placeholder="your.email@organization.com">
+                                </div>
+                                <div class="form-group">
+                                    <label for="phone">Phone Number</label>
+                                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Project Overview -->
+                        <div class="form-section">
+                            <h4>Project Overview</h4>
+                            <div class="form-group">
+                                <label for="research_field">Research Field *</label>
+                                <input type="text" id="research_field" name="research_field" required placeholder="e.g., Social Sciences, Healthcare, Market Research">
+                            </div>
+                            <div class="form-group">
+                                <label for="methodology">Primary Research Methodology *</label>
+                                <select id="methodology" name="methodology" required>
+                                    <option value="">Select your primary methodology</option>
+                                    <option value="thematic">Thematic Analysis</option>
+                                    <option value="grounded">Grounded Theory</option>
+                                    <option value="content">Content Analysis</option>
+                                    <option value="discourse">Discourse Analysis</option>
+                                    <option value="mixed">Mixed Methods</option>
+                                    <option value="other">Other Methodology</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="data_description">Types of Data to Analyze *</label>
+                                <textarea id="data_description" name="data_description" rows="3" required placeholder="Describe the types of data you work with (interviews, surveys, documents, etc.)"></textarea>
+                            </div>
+                        </div>
+
+                        <!-- Tool Requirements -->
+                        <div class="form-section">
+                            <h4>Tool Requirements</h4>
+                            <div class="form-group">
+                                <label for="current_challenges">Current Challenges & Pain Points *</label>
+                                <textarea id="current_challenges" name="current_challenges" rows="4" required placeholder="What challenges are you facing with your current analysis process? What limitations do you experience?"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="desired_features">Desired Features & Functionality *</label>
+                                <textarea id="desired_features" name="desired_features" rows="4" required placeholder="What specific features and capabilities would make your research more efficient? What would your ideal tool do?"></textarea>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="timeline">Preferred Timeline</label>
+                                    <select id="timeline" name="timeline">
+                                        <option value="">Select timeline</option>
+                                        <option value="urgent">Urgent (1-4 weeks)</option>
+                                        <option value="standard">Standard (1-3 months)</option>
+                                        <option value="flexible">Flexible (3-6 months)</option>
+                                        <option value="long_term">Long-term (6+ months)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="budget_range">Budget Range</label>
+                                    <select id="budget_range" name="budget_range">
+                                        <option value="">Select budget range</option>
+                                        <option value="under_5k">Under $5,000</option>
+                                        <option value="5k_15k">$5,000 - $15,000</option>
+                                        <option value="15k_30k">$15,000 - $30,000</option>
+                                        <option value="30k_50k">$30,000 - $50,000</option>
+                                        <option value="over_50k">Over $50,000</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Additional Information -->
+                        <div class="form-section">
+                            <h4>Additional Information</h4>
+                            <div class="form-group">
+                                <label for="additional_info">Any Other Requirements or Considerations</label>
+                                <textarea id="additional_info" name="additional_info" rows="3" placeholder="Integration needs, specific platforms, team size, or any other relevant details..."></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" name="newsletter" checked>
+                                    <span class="checkmark"></span>
+                                    Subscribe to our research innovation newsletter
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label class="checkbox-container">
+                                    <input type="checkbox" name="contact_permission" required>
+                                    <span class="checkmark"></span>
+                                    I agree to be contacted about this custom tool request *
+                                </label>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="submit-btn">
+                            <i class="fas fa-paper-plane"></i>
+                            Submit Custom Tool Request
+                        </button>
+                        
+                        <p class="form-note">We'll contact you within 24 hours to discuss your project</p>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.design-hero {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.process-highlights {
+    margin-top: 2rem;
+}
+
+.highlight {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.highlight i {
+    font-size: 1.5rem;
+    color: var(--accent);
+    margin-top: 0.25rem;
+}
+
+.highlight h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.highlight p {
+    color: #666;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.design-form-container {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+}
+
+.design-form h3 {
+    color: var(--primary);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2rem;
+}
+
+.form-section h4 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--primary);
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px rgba(40, 122, 125, 0.1);
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 0.75rem;
+}
+
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #666;
+}
+
+.checkbox-container input {
+    margin-right: 0.5rem;
+}
+
+.form-info {
+    background: var(--light);
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-top: 2rem;
+}
+
+.form-info h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+}
+
+.form-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.form-info li {
+    padding: 0.5rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.form-info li:before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 122, 125, 0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .design-form-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .checkbox-group {
+        grid-template-columns: 1fr;
+    }
+    
+    .highlight {
+        flex-direction: column;
+        text-align: center;
+    }
+}
+.design-form-container {
+    background: white;
+    padding: 3rem;
+    border-radius: 16px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    border: 1px solid #f0f0f0;
+}
+
+.design-form h3 {
+    color: var(--primary);
+    margin-bottom: 2.5rem;
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: 700;
+    position: relative;
+}
+
+.design-form h3:after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 60px;
+    height: 3px;
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+    border-radius: 2px;
+}
+
+.form-section {
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.form-section:last-of-type {
+    border-bottom: none;
+    margin-bottom: 2rem;
+}
+
+.form-section h4 {
+    color: var(--primary);
+    margin-bottom: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.form-section h4:before {
+    content: '';
+    display: inline-block;
+    width: 4px;
+    height: 20px;
+    background: var(--accent);
+    margin-right: 12px;
+    border-radius: 2px;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+    position: relative;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 0.75rem;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid #e8ecef;
+    border-radius: 10px;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    font-family: inherit;
+    background: #fafbfc;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(40, 122, 125, 0.1);
+    transform: translateY(-2px);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #a0a4a8;
+    font-weight: 400;
+}
+
+/* Enhanced Select Styling */
+.form-group select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23666' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1.25rem center;
+    background-size: 16px;
+    padding-right: 3rem;
+}
+
+/* Textarea specific styling */
+.form-group textarea {
+    resize: vertical;
+    min-height: 120px;
+    line-height: 1.5;
+}
+
+/* Checkbox styling */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #555;
+    margin-bottom: 0.5rem;
+}
+
+.checkbox-container input {
+    margin-right: 0.75rem;
+    transform: scale(1.1);
+}
+
+.checkmark {
+    width: 18px;
+    height: 18px;
+    border: 2px solid #ddd;
+    border-radius: 4px;
+    margin-right: 0.75rem;
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.checkbox-container input:checked + .checkmark {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.checkbox-container input:checked + .checkmark:after {
+    content: '✓';
+    position: absolute;
+    color: white;
+    font-size: 12px;
+    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 1.25rem 2rem;
+    background: linear-gradient(135deg, var(--accent) 0%, #1f8c8f 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.submit-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(40, 122, 125, 0.35);
+}
+
+.submit-btn:active {
+    transform: translateY(-1px);
+}
+
+.form-note {
+    text-align: center;
+    color: #666;
+    font-size: 0.9rem;
+    margin: 0;
+    font-style: italic;
+}
+
+/* Form info box styling */
+.form-info {
+    background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+    padding: 2rem;
+    border-radius: 12px;
+    border-left: 4px solid var(--accent);
+    margin-top: 2rem;
+}
+
+.form-info h4 {
+    color: var(--primary);
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+}
+
+.form-info ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.form-info li {
+    padding: 0.5rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+    font-size: 0.95rem;
+}
+
+.form-info li:before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+/* Enhanced focus states for accessibility */
+.form-group input:focus-visible,
+.form-group select:focus-visible,
+.form-group textarea:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+/* Loading state for submit button */
+.submit-btn.loading {
+    pointer-events: none;
+    opacity: 0.7;
+}
+
+.submit-btn.loading:after {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-left: 10px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Success state */
+.form-success {
+    background: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.form-success i {
+    font-size: 3rem;
+    color: #28a745;
+    margin-bottom: 1rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .design-form-container {
+        padding: 2rem 1.5rem;
+    }
+    
+    .form-row {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .form-section h4 {
+        font-size: 1.2rem;
+    }
+    
+    .design-form h3 {
+        font-size: 1.5rem;
+    }
+    
+    .form-info {
+        padding: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .design-form-container {
+        padding: 1.5rem 1rem;
+    }
+    
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+        padding: 0.875rem 1rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.querySelector('.design-form');
+    const submitBtn = form?.querySelector('.submit-btn');
+    
+    if (form && submitBtn) {
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Add loading state
+            submitBtn.classList.add('loading');
+            submitBtn.innerHTML = '<i class="fas fa-spinner"></i> Processing Request...';
+            
+            // Basic validation
+            const requiredFields = form.querySelectorAll('[required]');
+            let valid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    valid = false;
+                    field.style.borderColor = 'var(--error)';
+                    // Add error message
+                    if (!field.nextElementSibling?.classList.contains('error-message')) {
+                        const errorMsg = document.createElement('div');
+                        errorMsg.className = 'error-message';
+                        errorMsg.textContent = 'This field is required';
+                        errorMsg.style.color = 'var(--error)';
+                        errorMsg.style.fontSize = '0.8rem';
+                        errorMsg.style.marginTop = '0.5rem';
+                        field.parentNode.appendChild(errorMsg);
+                    }
+                } else {
+                    field.style.borderColor = '#e8ecef';
+                    // Remove error message if exists
+                    const errorMsg = field.parentNode.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.remove();
+                    }
+                }
+            });
+            
+            // Simulate form processing
+            setTimeout(() => {
+                if (valid) {
+                    // Show success state
+                    form.innerHTML = `
+                        <div class="form-success">
+                            <i class="fas fa-check-circle"></i>
+                            <h3>Request Submitted Successfully!</h3>
+                            <p>Thank you for your custom tool request. We'll contact you within 24 hours to discuss your project requirements.</p>
+                            <p><strong>Next Steps:</strong></p>
+                            <ul style="text-align: left; display: inline-block;">
+                                <li>Initial consultation call</li>
+                                <li>Requirements analysis</li>
+                                <li>Preliminary proposal</li>
+                            </ul>
+                        </div>
+                    `;
+                } else {
+                    // Reset button state
+                    submitBtn.classList.remove('loading');
+                    submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Submit Custom Tool Request';
+                    alert('Please fill in all required fields marked with *.');
+                }
+            }, 2000);
+        });
+        
+        // Real-time validation
+        const inputs = form.querySelectorAll('input, select, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', function() {
+                if (this.value.trim()) {
+                    this.style.borderColor = '#e8ecef';
+                    const errorMsg = this.parentNode.querySelector('.error-message');
+                    if (errorMsg) {
+                        errorMsg.remove();
+                    }
+                }
+            });
+            
+            // Add focus effects
+            input.addEventListener('focus', function() {
+                this.parentNode.style.transform = 'translateY(-2px)';
+            });
+            
+            input.addEventListener('blur', function() {
+                this.parentNode.style.transform = 'translateY(0)';
+            });
+        });
+    }
+});
+</script>
+{% endblock %}

@@ -22,49 +22,14 @@ class BenefitAdmin(admin.ModelAdmin):
     list_display = ['title', 'order']
     list_editable = ['order']
 
-@admin.register(Testimonial)
-class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ['author', 'rating', 'company', 'is_active', 'created_at']
-    list_editable = ['is_active']
-    list_filter = ['rating', 'is_active']
+# @admin.register(Testimonial)
+# class TestimonialAdmin(admin.ModelAdmin):
+#     list_display = ['author', 'rating', 'company', 'is_active', 'created_at']
+#     list_editable = ['is_active']
+#     list_filter = ['rating', 'is_active']
 
 
-#================================
-
-@admin.register(ContentAnalysis)
-class ContentAnalysisAdmin(admin.ModelAdmin):
-    list_display = ['name', 'user', 'analysis_type', 'report_language', 'is_completed', 'created_at']
-    list_filter = ['analysis_type', 'report_language', 'is_completed', 'created_at']
-    search_fields = ['name', 'user__username', 'keywords']
-    readonly_fields = ['created_at', 'updated_at']
-    fieldsets = [
-        ('Basic Information', {
-            'fields': ['user', 'name', 'created_at', 'updated_at']
-        }),
-        ('Analysis Parameters', {
-            'fields': ['analysis_type', 'report_language', 'keywords']
-        }),
-        ('Results', {
-            'fields': ['results_json', 'file_contents_json', 'is_completed', 'error_message']
-        }),
-    ]
-
-@admin.register(AnalysisFile)
-class AnalysisFileAdmin(admin.ModelAdmin):
-    list_display = ['file_name', 'analysis', 'file_type', 'uploaded_at']
-    list_filter = ['file_type', 'uploaded_at']
-    search_fields = ['file_name', 'analysis__name']
-
-@admin.register(ChatMessage)
-class ChatMessageAdmin(admin.ModelAdmin):
-    list_display = ['analysis', 'role', 'created_at']
-    list_filter = ['role', 'created_at']
-    search_fields = ['content', 'analysis__name']
-    readonly_fields = ['created_at']
-
-@admin.register(GeneratedReport)
-class GeneratedReportAdmin(admin.ModelAdmin):
-    list_display = ['analysis', 'report_type', 'language', 'generated_at']
-    list_filter = ['report_type', 'language', 'generated_at']
-    search_fields = ['analysis__name']
-    readonly_fields = ['generated_at']
+    # list_display = ['analysis', 'report_type', 'language', 'generated_at']
+    # list_filter = ['report_type', 'language', 'generated_at']
+    # search_fields = ['analysis__name']
+    # readonly_fields = ['generated_at']

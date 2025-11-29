@@ -128,82 +128,82 @@ class PaperAnalysisForm(forms.Form):
 
 
 
-# class PaperAnalysisForm(forms.Form):
-#     ANALYSIS_TYPE_CHOICES = [
-#         ('summary', 'Paper Summary'),
-#         ('draft', 'Document Draft'),
-#         ('qa', 'Q&A Analysis'),
-#         ('system', 'Custom Prompt'),
-#     ]
+class PaperAnalysisForm(forms.Form):
+    ANALYSIS_TYPE_CHOICES = [
+        ('summary', 'Paper Summary'),
+        ('draft', 'Document Draft'),
+        ('qa', 'Q&A Analysis'),
+        ('system', 'Custom Prompt'),
+    ]
     
-#     file = forms.FileField(
-#         label="Upload PDF/Text File",
-#         required=False,
-#         help_text="Upload a PDF file or leave empty to input text directly"
-#     )
-#     text_content = forms.CharField(
-#         label="Or Input Text Directly",
-#         required=False,
-#         widget=forms.Textarea(attrs={'rows': 6, 'placeholder': 'Paste your scientific paper text here...'}),
-#         help_text="Enter text directly if you don't have a PDF file"
-#     )
-#     language = forms.ChoiceField(
-#         label="Output Language",
-#         choices=[('en', 'English'), ('ar', 'Arabic'), ('fr', 'French')],
-#         initial='en',
-#         help_text="Select the language for the analysis output"
-#     )
-#     analysis_type = forms.ChoiceField(
-#         label="Analysis Type",
-#         choices=ANALYSIS_TYPE_CHOICES,
-#         initial='summary',
-#         help_text="Choose the type of analysis to perform"
-#     )
-#     question = forms.CharField(
-#         label="Question",
-#         required=False,
-#         widget=forms.TextInput(attrs={'placeholder': 'Enter your question about the paper...'}),
-#         help_text="Required for Q&A analysis"
-#     )
-#     document_spec = forms.CharField(
-#         label="Document Specifications (JSON)",
-#         required=False,
-#         widget=forms.Textarea(attrs={'rows': 3, 'placeholder': '{"DOCUMENT_TYPE": "Research Paper", "TARGET_AUDIENCE": "Researchers", "TONE": "formal"}'}),
-#         help_text="JSON format for document specifications in draft mode"
-#     )
-#     custom_prompt = forms.CharField(
-#         label="Custom Prompt",
-#         required=False,
-#         widget=forms.Textarea(attrs={'rows': 3, 'placeholder': 'Enter your custom instructions...'}),
-#         help_text="Required for custom prompt analysis"
-#     )
+    file = forms.FileField(
+        label="Upload PDF/Text File",
+        required=False,
+        help_text="Upload a PDF file or leave empty to input text directly"
+    )
+    text_content = forms.CharField(
+        label="Or Input Text Directly",
+        required=False,
+        widget=forms.Textarea(attrs={'rows': 6, 'placeholder': 'Paste your scientific paper text here...'}),
+        help_text="Enter text directly if you don't have a PDF file"
+    )
+    language = forms.ChoiceField(
+        label="Output Language",
+        choices=[('en', 'English'), ('ar', 'Arabic'), ('fr', 'French')],
+        initial='en',
+        help_text="Select the language for the analysis output"
+    )
+    analysis_type = forms.ChoiceField(
+        label="Analysis Type",
+        choices=ANALYSIS_TYPE_CHOICES,
+        initial='summary',
+        help_text="Choose the type of analysis to perform"
+    )
+    question = forms.CharField(
+        label="Question",
+        required=False,
+        widget=forms.TextInput(attrs={'placeholder': 'Enter your question about the paper...'}),
+        help_text="Required for Q&A analysis"
+    )
+    document_spec = forms.CharField(
+        label="Document Specifications (JSON)",
+        required=False,
+        widget=forms.Textarea(attrs={'rows': 3, 'placeholder': '{"DOCUMENT_TYPE": "Research Paper", "TARGET_AUDIENCE": "Researchers", "TONE": "formal"}'}),
+        help_text="JSON format for document specifications in draft mode"
+    )
+    custom_prompt = forms.CharField(
+        label="Custom Prompt",
+        required=False,
+        widget=forms.Textarea(attrs={'rows': 3, 'placeholder': 'Enter your custom instructions...'}),
+        help_text="Required for custom prompt analysis"
+    )
 
-#     def clean(self):
-#         cleaned_data = super().clean()
-#         file = cleaned_data.get('file')
-#         text_content = cleaned_data.get('text_content')
-#         analysis_type = cleaned_data.get('analysis_type')
+    def clean(self):
+        cleaned_data = super().clean()
+        file = cleaned_data.get('file')
+        text_content = cleaned_data.get('text_content')
+        analysis_type = cleaned_data.get('analysis_type')
         
-#         # Validate that either file or text is provided
-#         if not file and not text_content:
-#             raise forms.ValidationError("Either upload a file or enter text content.")
+        # Validate that either file or text is provided
+        if not file and not text_content:
+            raise forms.ValidationError("Either upload a file or enter text content.")
         
-#         # Validate required fields based on analysis type
-#         if analysis_type == 'qa' and not cleaned_data.get('question'):
-#             raise forms.ValidationError("Question is required for Q&A analysis.")
+        # Validate required fields based on analysis type
+        if analysis_type == 'qa' and not cleaned_data.get('question'):
+            raise forms.ValidationError("Question is required for Q&A analysis.")
         
-#         if analysis_type == 'system' and not cleaned_data.get('custom_prompt'):
-#             raise forms.ValidationError("Custom prompt is required for system analysis.")
+        if analysis_type == 'system' and not cleaned_data.get('custom_prompt'):
+            raise forms.ValidationError("Custom prompt is required for system analysis.")
         
-#         # Validate document_spec JSON if provided
-#         document_spec = cleaned_data.get('document_spec')
-#         if document_spec:
-#             try:
-#                 json.loads(document_spec)
-#             except json.JSONDecodeError:
-#                 raise forms.ValidationError("Document specifications must be valid JSON format.")
+        # Validate document_spec JSON if provided
+        document_spec = cleaned_data.get('document_spec')
+        if document_spec:
+            try:
+                json.loads(document_spec)
+            except json.JSONDecodeError:
+                raise forms.ValidationError("Document specifications must be valid JSON format.")
         
-#         return cleaned_data
+        return cleaned_data
 
 
 

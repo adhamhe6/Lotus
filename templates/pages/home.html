@@ -11,11 +11,14 @@
             <div class="overlay"></div>
         </div>
         <div class="hero-content">
-            <h1 class="text-hero-title">Explore Lotus</h1>
-            <p class="text-hero-subtitle">AI-powered platform for researchers and academics to analyze qualitative and quantitative data with precision</p>
+            <h1 class="text-hero-title" data-en="Explore Lotus" data-ar="اكتشف لوتس">Explore Lotus</h1>
+            <p class="text-hero-subtitle" data-en="AI-powered platform for researchers and academics to analyze qualitative and quantitative data with precision"
+               data-ar="منصة مدعومة بالذكاء الاصطناعي للباحثين والأكاديميين لتحليل البيانات النوعية والكمية بدقة">
+               AI-powered platform for researchers and academics to analyze qualitative and quantitative data with precision
+            </p>
             <div class="hero-buttons">
-                <button class="cta-btn primary text-cta-primary">Begin Analysis</button>
-                <button class="cta-btn secondary text-cta-secondary">Design Your Tool</button>
+                <a href="{% url 'products' %}" class="cta-btn primary text-cta-primary" data-en="Begin Analysis" data-ar="ابدأ التحليل">Begin Analysis</a>
+                <a href="{% url 'design_your_tool' %}" class="cta-btn secondary text-cta-secondary" data-en="Design Your Tool" data-ar="صمم أداتك">Design Your Tool</a>
             </div>
         </div>
     </section>
@@ -27,15 +30,21 @@
                 <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Lotus Platform Features" loading="lazy">
             </div>
             <div class="section-text">
-                <span class="section-tag text-products">Products</span>
-                <h2 class="text-feature1-title">Advanced AI-Powered Analysis Tools</h2>
-                <p class="text-feature1-desc">Lotus Platform offers comprehensive qualitative and quantitative data analysis with cutting-edge AI algorithms and natural language processing.</p>
+                <span class="section-tag text-products" data-en="Products" data-ar="المنتجات">Products</span>
+                <h2 class="text-feature1-title" data-en="Advanced AI-Powered Analysis Tools" data-ar="أدوات تحليل متقدمة مدعومة بالذكاء الاصطناعي">Advanced AI-Powered Analysis Tools</h2>
+                <p class="text-feature1-desc" data-en="Lotus Platform offers comprehensive qualitative and quantitative data analysis with cutting-edge AI algorithms and natural language processing."
+                   data-ar="تقدم منصة لوتس تحليلاً شاملاً للبيانات النوعية والكمية باستخدام خوارزميات الذكاء الاصطناعي المتطورة ومعالجة اللغة الطبيعية.">
+                   Lotus Platform offers comprehensive qualitative and quantitative data analysis with cutting-edge AI algorithms and natural language processing.
+                </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-language"></i> <span class="text-feature1-item1">Dual language support (Arabic & English)</span></li>
-                    <li><i class="fas fa-file-alt"></i> <span class="text-feature1-item2">Multi-format data processing</span></li>
-                    <li><i class="fas fa-chart-line"></i> <span class="text-feature1-item3">Automated insights and visualization</span></li>
+                    <li><i class="fas fa-language"></i> <span class="text-feature1-item1" data-en="Dual language support (Arabic & English)" data-ar="دعم ثنائي اللغة (العربية والإنجليزية)">Dual language support (Arabic & English)</span></li>
+                    <li><i class="fas fa-file-alt"></i> <span class="text-feature1-item2" data-en="Multi-format data processing" data-ar="معالجة البيانات متعددة التنسيقات">Multi-format data processing</span></li>
+                    <li><i class="fas fa-chart-line"></i> <span class="text-feature1-item3" data-en="Automated insights and visualization" data-ar="رؤى وتصورات آلية">Automated insights and visualization</span></li>
                 </ul>
-                <a href = "{% url 'products' %}" class="learn-more"><span class="text-learn-more">Explore all products</span><i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'products' %}" class="learn-more">
+                    <span class="text-learn-more" data-en="Explore all products" data-ar="استكشف جميع المنتجات">Explore all products</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -47,15 +56,21 @@
                 <img src="https://images.unsplash.com/photo-1531403009284-440f080d1e12?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Lotus Services" loading="lazy">
             </div>
             <div class="section-text">
-                <span class="section-tag text-services">Our Services</span>
-                <h2 class="text-feature2-title">Comprehensive Research Support</h2>
-                <p class="text-feature2-desc">We provide end-to-end services from data collection to analysis and visualization for academic and professional research teams.</p>
+                <span class="section-tag text-services" data-en="Our Services" data-ar="خدماتنا">Our Services</span>
+                <h2 class="text-feature2-title" data-en="Comprehensive Research Support" data-ar="دعم بحثي شامل">Comprehensive Research Support</h2>
+                <p class="text-feature2-desc" data-en="We provide end-to-end services from data collection to analysis and visualization for academic and professional research teams."
+                   data-ar="نقدم خدمات شاملة من جمع البيانات إلى التحليل والتصور للفرق البحثية الأكاديمية والمهنية.">
+                   We provide end-to-end services from data collection to analysis and visualization for academic and professional research teams.
+                </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-users-cog"></i> <span class="text-feature2-item1">Custom tool development</span></li>
-                    <li><i class="fas fa-hands-helping"></i> <span class="text-feature2-item2">Research consultation</span></li>
-                    <li><i class="fas fa-chart-pie"></i> <span class="text-feature2-item3">Data visualization services</span></li>
+                    <li><i class="fas fa-users-cog"></i> <span class="text-feature2-item1" data-en="Custom tool development" data-ar="تطوير أدوات مخصصة">Custom tool development</span></li>
+                    <li><i class="fas fa-hands-helping"></i> <span class="text-feature2-item2" data-en="Research consultation" data-ar="استشارات بحثية">Research consultation</span></li>
+                    <li><i class="fas fa-chart-pie"></i> <span class="text-feature2-item3" data-en="Data visualization services" data-ar="خدمات تصور البيانات">Data visualization services</span></li>
                 </ul>
-                <a href="#services" class="learn-more"><span class="text-learn-more2">Discover our services</span><i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'services' %}" class="learn-more">
+                    <span class="text-learn-more2" data-en="Discover our services" data-ar="اكتشف خدماتنا">Discover our services</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -67,15 +82,21 @@
                 <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Industries We Serve" loading="lazy">
             </div>
             <div class="section-text">
-                <span class="section-tag text-industries">Industries</span>
-                <h2 class="text-feature3-title">Serving Diverse Sectors</h2>
-                <p class="text-feature3-desc">Our platform supports researchers and analysts across multiple industries with specialized tools and methodologies.</p>
+                <span class="section-tag text-industries" data-en="Industries" data-ar="القطاعات">Industries</span>
+                <h2 class="text-feature3-title" data-en="Serving Diverse Sectors" data-ar="نخدم قطاعات متنوعة">Serving Diverse Sectors</h2>
+                <p class="text-feature3-desc" data-en="Our platform supports researchers and analysts across multiple industries with specialized tools and methodologies."
+                   data-ar="تدعم منصتنا الباحثين والمحللين عبر صناعات متعددة بأدوات ومنهجيات متخصصة.">
+                   Our platform supports researchers and analysts across multiple industries with specialized tools and methodologies.
+                </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-graduation-cap"></i> <span class="text-feature3-item1">Academic Research & Universities</span></li>
-                    <li><i class="fas fa-building"></i> <span class="text-feature3-item2">Corporate Market Analysis</span></li>
-                    <li><i class="fas fa-landmark"></i> <span class="text-feature3-item3">Policy & Think Tank Organizations</span></li>
+                    <li><i class="fas fa-graduation-cap"></i> <span class="text-feature3-item1" data-en="Academic Research & Universities" data-ar="البحث الأكاديمي والجامعات">Academic Research & Universities</span></li>
+                    <li><i class="fas fa-building"></i> <span class="text-feature3-item2" data-en="Corporate Market Analysis" data-ar="تحليل السوق للشركات">Corporate Market Analysis</span></li>
+                    <li><i class="fas fa-landmark"></i> <span class="text-feature3-item3" data-en="Policy & Think Tank Organizations" data-ar="منظمات السياسات ومراكز الفكر">Policy & Think Tank Organizations</span></li>
                 </ul>
-                <a href="#industries" class="learn-more"><span class="text-learn-more3">View all industries</span><i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'industries' %}" class="learn-more">
+                    <span class="text-learn-more3" data-en="View all industries" data-ar="عرض جميع القطاعات">View all industries</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -87,15 +108,21 @@
                 <img src="https://images.unsplash.com/photo-1568992687947-868a62a9f521?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Lotus Resources" loading="lazy">
             </div>
             <div class="section-text">
-                <span class="section-tag text-resources">Resources</span>
-                <h2 class="text-feature4-title">Knowledge Center & Support</h2>
-                <p class="text-feature4-desc">Access tutorials, research methodologies, case studies, and best practices for qualitative data analysis.</p>
+                <span class="section-tag text-resources" data-en="Resources" data-ar="المصادر">Resources</span>
+                <h2 class="text-feature4-title" data-en="Knowledge Center & Support" data-ar="مركز المعرفة والدعم">Knowledge Center & Support</h2>
+                <p class="text-feature4-desc" data-en="Access tutorials, research methodologies, case studies, and best practices for qualitative data analysis."
+                   data-ar="الوصول إلى البرامج التعليمية ومنهجيات البحث ودراسات الحالة وأفضل الممارسات لتحليل البيانات النوعية.">
+                   Access tutorials, research methodologies, case studies, and best practices for qualitative data analysis.
+                </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-book"></i> <span class="text-feature4-item1">Research Methodology Guides</span></li>
-                    <li><i class="fas fa-graduation-cap"></i> <span class="text-feature4-item2">Training & Tutorials</span></li>
-                    <li><i class="fas fa-project-diagram"></i> <span class="text-feature4-item3">Case Studies & Best Practices</span></li>
+                    <li><i class="fas fa-book"></i> <span class="text-feature4-item1" data-en="Research Methodology Guides" data-ar="أدلة منهجية البحث">Research Methodology Guides</span></li>
+                    <li><i class="fas fa-graduation-cap"></i> <span class="text-feature4-item2" data-en="Training & Tutorials" data-ar="التدريب والبرامج التعليمية">Training & Tutorials</span></li>
+                    <li><i class="fas fa-project-diagram"></i> <span class="text-feature4-item3" data-en="Case Studies & Best Practices" data-ar="دراسات الحالة وأفضل الممارسات">Case Studies & Best Practices</span></li>
                 </ul>
-                <a href="#resources" class="learn-more"><span class="text-learn-more4">Explore resources</span> <i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'resources' %}" class="learn-more">
+                    <span class="text-learn-more4" data-en="Explore resources" data-ar="استكشف المصادر">Explore resources</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
@@ -107,16 +134,137 @@
                 <img src="{% static 'img/img7.jpg' %}" alt="Custom Tool Design" loading="lazy">
             </div>
             <div class="section-text">
-                <span class="section-tag text-design">Design Your Tool</span>
-                <h2 class="text-feature5-title">Tailored Solutions for Your Research</h2>
-                <p class="text-feature5-desc">Request custom-developed tools and modules specifically designed for your research methodology and requirements.</p>
+                <span class="section-tag text-design" data-en="Design Your Tool" data-ar="صمم أداتك">Design Your Tool</span>
+                <h2 class="text-feature5-title" data-en="Tailored Solutions for Your Research" data-ar="حلول مخصصة لبحثك">Tailored Solutions for Your Research</h2>
+                <p class="text-feature5-desc" data-en="Request custom-developed tools and modules specifically designed for your research methodology and requirements."
+                   data-ar="اطلب أدوات ووحدات مخصصة مصممة خصيصًا لمنهجية البحث ومتطلباتك.">
+                   Request custom-developed tools and modules specifically designed for your research methodology and requirements.
+                </p>
                 <ul class="feature-list">
-                    <li><i class="fas fa-tools"></i> <span class="text-feature5-item1">Custom module development</span></li>
-                    <li><i class="fas fa-project-diagram"></i> <span class="text-feature5-item2">Methodology-specific tools</span></li>
-                    <li><i class="fas fa-cogs"></i> <span class="text-feature5-item3">Workflow integration</span></li>
+                    <li><i class="fas fa-tools"></i> <span class="text-feature5-item1" data-en="Custom module development" data-ar="تطوير وحدات مخصصة">Custom module development</span></li>
+                    <li><i class="fas fa-project-diagram"></i> <span class="text-feature5-item2" data-en="Methodology-specific tools" data-ar="أدوات منهجية محددة">Methodology-specific tools</span></li>
+                    <li><i class="fas fa-cogs"></i> <span class="text-feature5-item3" data-en="Workflow integration" data-ar="تكامل سير العمل">Workflow integration</span></li>
                 </ul>
-                <a href="#custom" class="learn-more"><span class="text-learn-more5">Start designing</span><i class="fas fa-arrow-right"></i></a>
+                <a href="{% url 'design_your_tool' %}" class="learn-more">
+                    <span class="text-learn-more5" data-en="Start designing" data-ar="ابدأ التصميم">Start designing</span>
+                    <i class="fas fa-arrow-right"></i>
+                </a>
             </div>
         </div>
     </section>
+
+<style>
+/* Ensure CTA buttons look good as links */
+.cta-btn {
+    display: inline-block;
+    text-decoration: none;
+    text-align: center;
+    padding: 1rem 2rem;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.cta-btn.primary {
+    background: var(--accent);
+    color: white;
+}
+
+.cta-btn.primary:hover {
+    background: #1f8c8f;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(40, 122, 125, 0.3);
+}
+
+.cta-btn.secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 2px solid var(--primary);
+}
+
+.cta-btn.secondary:hover {
+    background: var(--primary);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* RTL Support */
+body.rtl .section-text {
+    text-align: right;
+}
+
+body.rtl .feature-list li {
+    text-align: right;
+}
+
+body.rtl .learn-more {
+    flex-direction: row-reverse;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .cta-btn {
+        width: 100%;
+        max-width: 280px;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language switching functionality
+    function updateLanguage() {
+        const isRTL = document.body.classList.contains('rtl');
+        const elements = document.querySelectorAll('[data-en][data-ar]');
+        
+        elements.forEach(element => {
+            if (isRTL) {
+                element.textContent = element.getAttribute('data-ar');
+            } else {
+                element.textContent = element.getAttribute('data-en');
+            }
+        });
+    }
+
+    // Initial language update
+    updateLanguage();
+
+    // Listen for language changes
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            setTimeout(updateLanguage, 100);
+        });
+    }
+
+    // Smooth scrolling for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+                target.scrollIntoView({
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    });
+});
+</script>
 {% endblock %}

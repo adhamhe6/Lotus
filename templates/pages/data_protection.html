@@ -1,0 +1,208 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="legal-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 data-en="Privacy Policy" data-ar="سياسة الخصوصية" id="page-title">Privacy Policy</h1>
+            <p data-en="Last updated: March 2024" data-ar="آخر تحديث: مارس 2024">Last updated: March 2024</p>
+        </div>
+    </section>
+
+    <!-- Legal Content -->
+    <section class="content-section">
+        <div class="legal-container">
+            <div class="legal-content">
+                <div class="legal-section">
+                    <h2 data-en="Introduction" data-ar="المقدمة">Introduction</h2>
+                    <p data-en="Lotus Platform ('we,' 'our,' or 'us') is committed to protecting your privacy. This Privacy Policy explains how your personal information is collected, used, and disclosed by Lotus Platform."
+                       data-ar="تلتزم منصة لوتس ('نحن' أو 'خاصتنا') بحماية خصوصيتك. توضح سياسة الخصوصية هذه كيف يتم جمع معلوماتك الشخصية واستخدامها والإفصاح عنها بواسطة منصة لوتس.">
+                       We are committed to protecting your privacy and personal information.
+                    </p>
+                </div>
+
+                <div class="legal-section">
+                    <h2 data-en="Information We Collect" data-ar="المعلومات التي نجمعها">Information We Collect</h2>
+                    <p data-en="We collect information you provide directly to us, such as when you create an account, use our services, or contact us for support."
+                       data-ar="نجمع المعلومات التي تقدمها لنا مباشرة، مثل عندما تنشئ حسابًا أو تستخدم خدماتنا أو تتصل بنا للحصول على الدعم.">
+                       We collect information you provide directly to us.
+                    </p>
+                </div>
+
+                <div class="legal-section">
+                    <h2 data-en="How We Use Your Information" data-ar="كيف نستخدم معلوماتك">How We Use Your Information</h2>
+                    <p data-en="We use the information we collect to provide, maintain, and improve our services, to develop new services, and to protect Lotus Platform and our users."
+                       data-ar="نستخدم المعلومات التي نجمعها لتقديم خدماتنا والحفاظ عليها وتحسينها، ولتطوير خدمات جديدة، ولحماية منصة لوتس ومستخدمينا.">
+                       We use information to provide, maintain, and improve our services.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.legal-hero {
+    position: relative;
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.1rem;
+    opacity: 0.9;
+}
+
+.legal-container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.legal-content {
+    background: white;
+    padding: 3rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+.legal-section {
+    margin-bottom: 2.5rem;
+}
+
+.legal-section h2 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.legal-section p {
+    color: #666;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+}
+
+.legal-section ul {
+    color: #666;
+    line-height: 1.7;
+    padding-left: 1.5rem;
+}
+
+.legal-section li {
+    margin-bottom: 0.5rem;
+}
+
+/* RTL Support */
+body.rtl .legal-section ul {
+    padding-left: 0;
+    padding-right: 1.5rem;
+}
+
+body.rtl .legal-content {
+    text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .legal-content {
+        padding: 2rem 1.5rem;
+    }
+    
+    .hero-content h1 {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Update page title based on current page
+    function updatePageTitle() {
+        const currentPath = window.location.pathname;
+        const pageTitle = document.getElementById('page-title');
+        
+        if (currentPath.includes('privacy-policy')) {
+            pageTitle.setAttribute('data-en', 'Privacy Policy');
+            pageTitle.setAttribute('data-ar', 'سياسة الخصوصية');
+            document.title = 'Privacy Policy - Lotus Platform';
+        } else if (currentPath.includes('terms-of-service')) {
+            pageTitle.setAttribute('data-en', 'Terms of Service');
+            pageTitle.setAttribute('data-ar', 'شروط الخدمة');
+            document.title = 'Terms of Service - Lotus Platform';
+        } else if (currentPath.includes('data-protection')) {
+            pageTitle.setAttribute('data-en', 'Data Protection');
+            pageTitle.setAttribute('data-ar', 'حماية البيانات');
+            document.title = 'Data Protection - Lotus Platform';
+        }
+    }
+
+    // Language switching functionality
+    function updateLanguage() {
+        const isRTL = document.body.classList.contains('rtl');
+        const elements = document.querySelectorAll('[data-en][data-ar]');
+        
+        elements.forEach(element => {
+            if (isRTL) {
+                element.textContent = element.getAttribute('data-ar');
+            } else {
+                element.textContent = element.getAttribute('data-en');
+            }
+        });
+    }
+
+    // Initial setup
+    updatePageTitle();
+    updateLanguage();
+
+    // Listen for language changes
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            setTimeout(updateLanguage, 100);
+        });
+    }
+});
+</script>
+{% endblock %}

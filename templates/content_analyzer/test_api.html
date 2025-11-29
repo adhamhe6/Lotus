@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            <div class="card">
+                <div class="card-header">
+                    <h3>Test Perplexity API Connection</h3>
+                </div>
+                <div class="card-body">
+                    <p>API Key Status: 
+                        {% if settings.PERPLEXITY_API_KEY %}
+                            <span class="badge bg-success">Configured</span>
+                        {% else %}
+                            <span class="badge bg-danger">Not Configured</span>
+                        {% endif %}
+                    </p>
+                    
+                    <form id="test-form">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="test-message" class="form-label">Test Message:</label>
+                            <input type="text" class="form-control" id="test-message" name="test_message" value="Hello, are you working?" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Test API</button>
+                    </form>
+                    
+                    <div id="results" class="mt-4" style="display: none;">
+                        <h5>Results:</h5>
+                        <div id="result-content" class="alert alert-info"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+document.getElementById('test-form').addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = new FormData(this);
+    const resultsDiv = document.getElementById('results');
+    const resultContent = document.getElementById('result-content');
+    
+    fetch('{% url "test_perplexity_api" %}', {
+        method: 'POST',
+        body: formData,
+        headers: {
+            'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+        }
+    })
+    .then(response => response.json())
+    .then(data => {
+        resultsDiv.style.display = 'block';
+        if (data.status === 'success') {
+            resultContent.className = 'alert alert-success';
+            resultContent.innerHTML = `
+                <strong>Success!</strong><br>
+                <strong>Test Message:</strong> ${data.test_message}<br>
+                <strong>API Response:</strong> ${data.api_response}
+            `;
+        } else {
+            resultContent.className = 'alert alert-danger';
+            resultContent.innerHTML = `<strong>Error:</strong> ${data.error}`;
+        }
+    })
+    .catch(error => {
+        resultsDiv.style.display = 'block';
+        resultContent.className = 'alert alert-danger';
+        resultContent.innerHTML = `<strong>Request Error:</strong> ${error}`;
+    });
+});
+</script>
+{% endblock %}

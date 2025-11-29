@@ -1,0 +1,485 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="resources-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Resources & Knowledge Center</h1>
+            <p>Learn, explore, and master qualitative data analysis with our comprehensive resources</p>
+        </div>
+    </section>
+
+    <!-- Resources Navigation -->
+    <section class="resources-nav">
+        <div class="container">
+            <div class="nav-tabs">
+                <button class="nav-tab active" data-tab="methodology">Methodology Guides</button>
+                <button class="nav-tab" data-tab="tutorials">Tutorials & Training</button>
+                <button class="nav-tab" data-tab="cases">Case Studies</button>
+                <button class="nav-tab" data-tab="webinars">Webinars</button>
+                <button class="nav-tab" data-tab="blog">Research Blog</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Methodology Guides -->
+    <section class="content-section tab-content active" id="methodology">
+        <div class="section-header">
+            <h2>Research Methodology Guides</h2>
+            <p>Comprehensive guides on qualitative research methods and best practices</p>
+        </div>
+
+        <div class="resources-grid">
+            <div class="resource-card">
+                <div class="resource-type">Guide</div>
+                <h3>Thematic Analysis Master Guide</h3>
+                <p>Complete step-by-step guide to conducting thematic analysis with Lotus Platform tools.</p>
+                <div class="resource-meta">
+                    <span><i class="fas fa-clock"></i> 45 min read</span>
+                    <span><i class="fas fa-download"></i> PDF</span>
+                </div>
+                <a href="#" class="resource-link">Download Guide <i class="fas fa-arrow-down"></i></a>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-type">Framework</div>
+                <h3>Grounded Theory Implementation</h3>
+                <p>Framework for applying grounded theory methodology using our analysis tools.</p>
+                <div class="resource-meta">
+                    <span><i class="fas fa-clock"></i> 30 min read</span>
+                    <span><i class="fas fa-download"></i> PDF</span>
+                </div>
+                <a href="#" class="resource-link">Download Framework <i class="fas fa-arrow-down"></i></a>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-type">Template</div>
+                <h3>Research Protocol Templates</h3>
+                <p>Ready-to-use templates for research protocols, consent forms, and data management plans.</p>
+                <div class="resource-meta">
+                    <span><i class="fas fa-clock"></i> Various</span>
+                    <span><i class="fas fa-download"></i> DOCX</span>
+                </div>
+                <a href="#" class="resource-link">Download Templates <i class="fas fa-arrow-down"></i></a>
+            </div>
+
+            <div class="resource-card">
+                <div class="resource-type">Checklist</div>
+                <h3>Quality Assurance Checklist</h3>
+                <p>Comprehensive checklist for ensuring quality in qualitative data analysis projects.</p>
+                <div class="resource-meta">
+                    <span><i class="fas fa-clock"></i> 15 min read</span>
+                    <span><i class="fas fa-download"></i> PDF</span>
+                </div>
+                <a href="#" class="resource-link">Download Checklist <i class="fas fa-arrow-down"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tutorials & Training -->
+    <section class="content-section tab-content" id="tutorials">
+        <div class="section-header">
+            <h2>Tutorials & Training Materials</h2>
+            <p>Learn how to use Lotus Platform tools effectively with our video tutorials and training resources</p>
+        </div>
+
+        <div class="tutorials-grid">
+            <div class="tutorial-card">
+                <div class="tutorial-video">
+                    <i class="fas fa-play-circle"></i>
+                    <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Getting Started Tutorial">
+                </div>
+                <h3>Getting Started with Lotus Analyzer</h3>
+                <p>Complete beginner's guide to setting up and using our core analysis tool.</p>
+                <div class="tutorial-meta">
+                    <span><i class="fas fa-clock"></i> 25 min</span>
+                    <span><i class="fas fa-level-down-alt"></i> Beginner</span>
+                </div>
+            </div>
+
+            <div class="tutorial-card">
+                <div class="tutorial-video">
+                    <i class="fas fa-play-circle"></i>
+                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Advanced Features">
+                </div>
+                <h3>Advanced Analysis Features</h3>
+                <p>Learn advanced techniques and hidden features for power users.</p>
+                <div class="tutorial-meta">
+                    <span><i class="fas fa-clock"></i> 45 min</span>
+                    <span><i class="fas fa-level-down-alt"></i> Advanced</span>
+                </div>
+            </div>
+
+            <div class="tutorial-card">
+                <div class="tutorial-video">
+                    <i class="fas fa-play-circle"></i>
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&auto=format&fit=crop&w=500&q=80" alt="Data Visualization">
+                </div>
+                <h3>Data Visualization Masterclass</h3>
+                <p>Create compelling visualizations and reports from your analysis results.</p>
+                <div class="tutorial-meta">
+                    <span><i class="fas fa-clock"></i> 35 min</span>
+                    <span><i class="fas fa-level-down-alt"></i> Intermediate</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Links -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Support</span>
+                <h2>Need Immediate Help?</h2>
+                <p>Access our support resources and get help when you need it most.</p>
+                
+                <div class="support-links">
+                    <a href="#" class="support-card">
+                        <i class="fas fa-book"></i>
+                        <h4>Documentation</h4>
+                        <p>Comprehensive technical documentation</p>
+                    </a>
+                    <a href="#" class="support-card">
+                        <i class="fas fa-question-circle"></i>
+                        <h4>FAQ</h4>
+                        <p>Answers to common questions</p>
+                    </a>
+                    <a href="#" class="support-card">
+                        <i class="fas fa-comments"></i>
+                        <h4>Community Forum</h4>
+                        <p>Connect with other users</p>
+                    </a>
+                    <a href="#" class="support-card">
+                        <i class="fas fa-headset"></i>
+                        <h4>Contact Support</h4>
+                        <p>Get help from our team</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.resources-hero {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.resources-nav {
+    background: white;
+    border-bottom: 1px solid #e1e5e9;
+    padding: 1rem 0;
+}
+
+.nav-tabs {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.nav-tab {
+    background: none;
+    border: none;
+    padding: 1rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    color: #666;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+}
+
+.nav-tab.active,
+.nav-tab:hover {
+    background: var(--primary);
+    color: white;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.resources-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.resource-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    border-left: 4px solid var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.resource-card:hover {
+    transform: translateY(-5px);
+}
+
+.resource-type {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: inline-block;
+    margin-bottom: 1rem;
+}
+
+.resource-card h3 {
+    color: var(--primary);
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.resource-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.resource-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.resource-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.resource-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.resource-link:hover {
+    gap: 1rem;
+}
+
+.tutorials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.tutorial-card {
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease;
+}
+
+.tutorial-card:hover {
+    transform: translateY(-5px);
+}
+
+.tutorial-video {
+    position: relative;
+    height: 200px;
+    overflow: hidden;
+}
+
+.tutorial-video img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tutorial-video i {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 3rem;
+    color: white;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.tutorial-card:hover .tutorial-video i {
+    opacity: 1;
+}
+
+.tutorial-card h3 {
+    padding: 1.5rem 1.5rem 0.5rem;
+    color: var(--primary);
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
+.tutorial-card p {
+    padding: 0 1.5rem;
+    color: #666;
+    margin-bottom: 1rem;
+}
+
+.tutorial-meta {
+    padding: 0 1.5rem 1.5rem;
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: #888;
+}
+
+.tutorial-meta span {
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+}
+
+.support-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+}
+
+.support-card {
+    background: white;
+    padding: 2rem;
+    border-radius: 8px;
+    text-decoration: none;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid #e1e5e9;
+}
+
+.support-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.support-card i {
+    font-size: 2.5rem;
+    color: var(--accent);
+    margin-bottom: 1rem;
+}
+
+.support-card h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.support-card p {
+    color: #666;
+    font-size: 0.9rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .nav-tabs {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .resources-grid,
+    .tutorials-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .support-links {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const tabs = document.querySelectorAll('.nav-tab');
+    const tabContents = document.querySelectorAll('.tab-content');
+    
+    tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+            const targetTab = this.getAttribute('data-tab');
+            
+            // Remove active class from all tabs and contents
+            tabs.forEach(t => t.classList.remove('active'));
+            tabContents.forEach(c => c.classList.remove('active'));
+            
+            // Add active class to current tab and content
+            this.classList.add('active');
+            document.getElementById(targetTab).classList.add('active');
+        });
+    });
+});
+</script>
+{% endblock %}

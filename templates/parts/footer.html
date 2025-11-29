@@ -2,59 +2,246 @@
 <footer class="footer">
     <div class="footer-container">
         <div class="footer-col">
-            <h3><i class="fas fa-spa"></i> <span class="text-lotus-footer">Lotus</span></h3>
-            <p class="text-footer-desc">Qualitative Data Analysis Platform<br>Inspired by Ancient Egyptian Knowledge Systems</p>
+            <h3><i class="fas fa-spa"></i> <span class="text-lotus-footer" data-en="Lotus" data-ar="لوتس">Lotus</span></h3>
+            <p class="text-footer-desc" data-en="Qualitative Data Analysis Platform<br>Inspired by Ancient Egyptian Knowledge Systems" 
+               data-ar="منصة تحليل البيانات النوعية<br>مستوحاة من أنظمة المعرفة المصرية القديمة">
+               Qualitative Data Analysis Platform<br>Inspired by Ancient Egyptian Knowledge Systems
+            </p>
             <div class="social-links">
                 <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
                 <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://linkedin.com/company/lotus-platform" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 <a href="#" aria-label="ResearchGate"><i class="fab fa-researchgate"></i></a>
             </div>
         </div>
         <div class="footer-col">
-            <h4 class="text-footer-products">Products</h4>
+            <h4 class="text-footer-products" data-en="Products" data-ar="المنتجات">Products</h4>
             <ul>
-                <li><a href="#" class="text-footer-product1">Lotus Analyzer</a></li>
-                <li><a href="#" class="text-footer-product2">Lotus Visualizer</a></li>
-                <li><a href="#" class="text-footer-product3">Lotus Collaborator</a></li>
-                <li><a href="#" class="text-footer-pricing">Pricing</a></li>
+                <li><a href="{% url 'products' %}" class="text-footer-product1" data-en="Lotus Analyzer" data-ar="محلل لوتس">Lotus Analyzer</a></li>
+                <li><a href="{% url 'products' %}" class="text-footer-product2" data-en="Lotus Visualizer" data-ar="مصور لوتس">Lotus Visualizer</a></li>
+                <li><a href="{% url 'products' %}" class="text-footer-product3" data-en="Lotus Collaborator" data-ar="معاون لوتس">Lotus Collaborator</a></li>
+                <li><a href="{% url 'pricing' %}" class="text-footer-pricing" data-en="Pricing" data-ar="التسعير">Pricing</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h4 class="text-footer-services">Services</h4>
+            <h4 class="text-footer-services" data-en="Services" data-ar="الخدمات">Services</h4>
             <ul>
-                <li><a href="#" class="text-footer-service1">Research Consulting</a></li>
-                <li><a href="#" class="text-footer-service2">Implementation</a></li>
-                <li><a href="#" class="text-footer-service3">Training Programs</a></li>
-                <li><a href="#" class="text-footer-service4">Methodology Support</a></li>
+                <li><a href="{% url 'services' %}" class="text-footer-service1" data-en="Research Consulting" data-ar="استشارات البحث">Research Consulting</a></li>
+                <li><a href="{% url 'services' %}" class="text-footer-service2" data-en="Implementation" data-ar="التنفيذ">Implementation</a></li>
+                <li><a href="{% url 'services' %}" class="text-footer-service3" data-en="Training Programs" data-ar="برامج التدريب">Training Programs</a></li>
+                <li><a href="{% url 'services' %}" class="text-footer-service4" data-en="Methodology Support" data-ar="دعم المنهجية">Methodology Support</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h4 class="text-footer-company">Company</h4>
+            <h4 class="text-footer-company" data-en="Company" data-ar="الشركة">Company</h4>
             <ul>
-                <li><a href="#" class="text-footer-about">About Us</a></li>
-                <li><a href="#" class="text-footer-contact">Contact</a></li>
-                <li><a href="#" class="text-footer-team">Executive Team</a></li>
-                <li><a href="#" class="text-footer-news">Newsroom</a></li>
-                <li><a href="#" class="text-footer-careers">Careers</a></li>
+                <li><a href="{% url 'about' %}" class="text-footer-about" data-en="About Us" data-ar="من نحن">About Us</a></li>
+                <li><a href="{% url 'contact' %}" class="text-footer-contact" data-en="Contact" data-ar="اتصل بنا">Contact</a></li>
+                <li><a href="{% url 'executive_team' %}" class="text-footer-team" data-en="Executive Team" data-ar="الفريق التنفيذي">Executive Team</a></li>
+                <li><a href="{% url 'newsroom' %}" class="text-footer-news" data-en="Newsroom" data-ar="الأخبار">Newsroom</a></li>
+                <li><a href="{% url 'careers' %}" class="text-footer-careers" data-en="Careers" data-ar="الوظائف">Careers</a></li>
             </ul>
         </div>
         <div class="footer-col">
-            <h4 class="text-footer-resources">Resources</h4>
+            <h4 class="text-footer-resources" data-en="Resources" data-ar="المصادر">Resources</h4>
             <ul>
-                <li><a href="#" class="text-footer-blog">Research Blog</a></li>
-                <li><a href="#" class="text-footer-papers">Methodology Papers</a></li>
-                <li><a href="#" class="text-footer-webinars">Webinars</a></li>
-                <li><a href="#" class="text-footer-cases">Case Studies</a></li>
+                <li><a href="{% url 'blog' %}" class="text-footer-blog" data-en="Research Blog" data-ar="مدونة البحث">Research Blog</a></li>
+                <li><a href="{% url 'resources' %}" class="text-footer-papers" data-en="Methodology Papers" data-ar="أوراق المنهجية">Methodology Papers</a></li>
+                <li><a href="{% url 'resources' %}" class="text-footer-webinars" data-en="Webinars" data-ar="الندوات عبر الإنترنت">Webinars</a></li>
+                <li><a href="{% url 'resources' %}" class="text-footer-cases" data-en="Case Studies" data-ar="دراسات الحالة">Case Studies</a></li>
             </ul>
         </div>
     </div>
     <div class="footer-bottom">
-        <p class="text-copyright">&copy; 2025 Lotus. All rights reserved.</p>
+        <p class="text-copyright" data-en="&copy; 2025 Lotus. All rights reserved." data-ar="&copy; 2025 لوتس. جميع الحقوق محفوظة.">&copy; 2025 Lotus. All rights reserved.</p>
         <div class="footer-links">
-            <a href="#" class="text-privacy">Privacy Policy</a>
-            <a href="#" class="text-terms">Terms of Service</a>
-            <a href="#" class="text-data">Data Protection</a>
+            <a href="{% url 'privacy_policy' %}" class="text-privacy" data-en="Privacy Policy" data-ar="سياسة الخصوصية">Privacy Policy</a>
+            <a href="{% url 'terms_of_service' %}" class="text-terms" data-en="Terms of Service" data-ar="شروط الخدمة">Terms of Service</a>
+            <a href="{% url 'data_protection' %}" class="text-data" data-en="Data Protection" data-ar="حماية البيانات">Data Protection</a>
         </div>
     </div>
 </footer>
+
+<style>
+.footer {
+    background: var(--primary);
+    color: white;
+    padding: 3rem 0 1rem;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 2rem;
+}
+
+.footer-col h3 {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+}
+
+.footer-col h3 i {
+    color: var(--secondary);
+}
+
+.footer-col h4 {
+    margin-bottom: 1rem;
+    font-size: 1.1rem;
+    color: var(--secondary);
+}
+
+.footer-col p {
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    opacity: 0.9;
+}
+
+.footer-col ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-col ul li {
+    margin-bottom: 0.5rem;
+}
+
+.footer-col ul li a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+}
+
+.footer-col ul li a:hover {
+    opacity: 1;
+    color: var(--secondary);
+}
+
+.social-links {
+    display: flex;
+    gap: 1rem;
+}
+
+.social-links a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+    color: white;
+    text-decoration: none;
+    transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+    background: var(--secondary);
+    color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.footer-bottom {
+    max-width: 1200px;
+    margin: 2rem auto 0;
+    padding: 2rem 2rem 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.footer-links {
+    display: flex;
+    gap: 2rem;
+}
+
+.footer-links a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.8;
+    transition: opacity 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.footer-links a:hover {
+    opacity: 1;
+    color: var(--secondary);
+}
+
+/* RTL Support */
+body.rtl .footer-container,
+body.rtl .footer-col ul,
+body.rtl .social-links,
+body.rtl .footer-links {
+    direction: rtl;
+}
+
+body.rtl .footer-col h3 {
+    flex-direction: row-reverse;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+    
+    .footer-bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 480px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language switching functionality for footer
+    function updateFooterLanguage() {
+        const isRTL = document.body.classList.contains('rtl');
+        const elements = document.querySelectorAll('[data-en][data-ar]');
+        
+        elements.forEach(element => {
+            if (isRTL) {
+                if (element.hasAttribute('data-ar')) {
+                    element.innerHTML = element.getAttribute('data-ar');
+                }
+            } else {
+                if (element.hasAttribute('data-en')) {
+                    element.innerHTML = element.getAttribute('data-en');
+                }
+            }
+        });
+    }
+
+    // Initial language update
+    updateFooterLanguage();
+
+    // Listen for language changes
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            setTimeout(updateFooterLanguage, 100);
+        });
+    }
+});
+</script>

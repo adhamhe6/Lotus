@@ -1,0 +1,328 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="industries-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1>Industries We Serve</h1>
+            <p>Transforming research and analysis across diverse sectors</p>
+        </div>
+    </section>
+
+    <!-- Industries Grid -->
+    <section class="content-section">
+        <div class="section-header">
+            <span class="section-tag">Industries</span>
+            <h2>Specialized Solutions for Every Sector</h2>
+            <p>Our tools and services are tailored to meet the unique research challenges of different industries</p>
+        </div>
+
+        <div class="industries-grid">
+            <!-- Industry 1 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-graduation-cap"></i>
+                </div>
+                <h3>Academic Research</h3>
+                <p>Supporting universities and research institutions with advanced qualitative analysis tools for academic studies and publications.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Thesis Analysis</span>
+                    <span class="feature-tag">Literature Review</span>
+                    <span class="feature-tag">Peer Review</span>
+                </div>
+                <a href="#" class="industry-link">Explore Academic Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Industry 2 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-building"></i>
+                </div>
+                <h3>Corporate Market Research</h3>
+                <p>Helping businesses understand customer sentiment, market trends, and competitive landscape through advanced text analysis.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Customer Feedback</span>
+                    <span class="feature-tag">Brand Analysis</span>
+                    <span class="feature-tag">Market Trends</span>
+                </div>
+                <a href="#" class="industry-link">Explore Business Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Industry 3 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-landmark"></i>
+                </div>
+                <h3>Government & Policy</h3>
+                <p>Supporting policy makers with evidence-based analysis of public feedback, legislative documents, and social research.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Policy Analysis</span>
+                    <span class="feature-tag">Public Opinion</span>
+                    <span class="feature-tag">Legislative Review</span>
+                </div>
+                <a href="#" class="industry-link">Explore Government Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Industry 4 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-heartbeat"></i>
+                </div>
+                <h3>Healthcare Research</h3>
+                <p>Enabling medical researchers to analyze patient feedback, clinical notes, and medical literature with precision.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Patient Feedback</span>
+                    <span class="feature-tag">Clinical Studies</span>
+                    <span class="feature-tag">Medical Literature</span>
+                </div>
+                <a href="#" class="industry-link">Explore Healthcare Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Industry 5 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-balance-scale"></i>
+                </div>
+                <h3>Legal & Compliance</h3>
+                <p>Assisting legal professionals in document analysis, case research, and compliance monitoring through AI-powered tools.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Document Review</span>
+                    <span class="feature-tag">Case Analysis</span>
+                    <span class="feature-tag">Compliance Monitoring</span>
+                </div>
+                <a href="#" class="industry-link">Explore Legal Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+
+            <!-- Industry 6 -->
+            <div class="industry-card">
+                <div class="industry-icon">
+                    <i class="fas fa-newspaper"></i>
+                </div>
+                <h3>Media & Journalism</h3>
+                <p>Empowering journalists and media organizations with tools for content analysis, sentiment tracking, and audience research.</p>
+                <div class="industry-features">
+                    <span class="feature-tag">Content Analysis</span>
+                    <span class="feature-tag">Audience Research</span>
+                    <span class="feature-tag">Trend Tracking</span>
+                </div>
+                <a href="#" class="industry-link">Explore Media Solutions <i class="fas fa-arrow-right"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag">Success Stories</span>
+                <h2>Industry Case Studies</h2>
+                <p>See how organizations across different sectors are leveraging our platform to drive insights and innovation.</p>
+                
+                <div class="case-studies">
+                    <div class="case-study">
+                        <h4>University Research Breakthrough</h4>
+                        <p>How a leading university used our tools to analyze 10,000+ academic papers and identify emerging research trends.</p>
+                        <span class="case-result">+40% research efficiency</span>
+                    </div>
+                    <div class="case-study">
+                        <h4>Corporate Market Insight</h4>
+                        <p>Global corporation transformed customer feedback analysis, reducing processing time from weeks to hours.</p>
+                        <span class="case-result">-85% analysis time</span>
+                    </div>
+                    <div class="case-study">
+                        <h4>Government Policy Impact</h4>
+                        <p>National agency leveraged our platform to analyze public consultation responses for major policy decisions.</p>
+                        <span class="case-result">+60% stakeholder engagement</span>
+                    </div>
+                </div>
+            </div>
+            <div class="section-img">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" alt="Industry Success" loading="lazy">
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.industries-hero {
+    position: relative;
+    height: 50vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3.5rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.3rem;
+    opacity: 0.9;
+}
+
+.industries-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.industry-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-left: 4px solid var(--accent);
+}
+
+.industry-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.industry-icon {
+    width: 70px;
+    height: 70px;
+    background: var(--light);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+}
+
+.industry-icon i {
+    font-size: 1.8rem;
+    color: var(--accent);
+}
+
+.industry-card h3 {
+    color: var(--primary);
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+.industry-card p {
+    color: #666;
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+}
+
+.industry-features {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+}
+
+.feature-tag {
+    background: var(--light);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.industry-link {
+    color: var(--accent);
+    text-decoration: none;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: gap 0.3s ease;
+}
+
+.industry-link:hover {
+    gap: 1rem;
+}
+
+.case-studies {
+    margin-top: 2rem;
+}
+
+.case-study {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--secondary);
+}
+
+.case-study h4 {
+    color: var(--primary);
+    margin-bottom: 0.5rem;
+    font-size: 1.1rem;
+}
+
+.case-study p {
+    color: #666;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.case-result {
+    background: var(--accent);
+    color: white;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .hero-content h1 {
+        font-size: 2.5rem;
+    }
+    
+    .industries-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .industry-card {
+        padding: 2rem;
+    }
+}
+</style>
+{% endblock %}

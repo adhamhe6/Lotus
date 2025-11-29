@@ -337,7 +337,7 @@ def create_csv_report(analysis_results, language='en'):
         raise Exception(f"Error creating CSV: {str(e)}")
 
 def chat_with_perplexity(message, conversation_history=None):
-    """Chat with Perplexity AI"""
+    """Chat with Perplexity AI with better error handling"""
     if conversation_history is None:
         conversation_history = []
     
@@ -369,7 +369,15 @@ def chat_with_perplexity(message, conversation_history=None):
             result = response.json()
             if 'choices' in result and len(result['choices']) > 0:
                 return result['choices'][0]['message']['content']
-        return f"Error: {response.status_code}"
+            else:
+                return "Error: No response choices available from API"
+        else:
+            return f"API Error: {response.status_code} - {response.text}"
+            
+    except requests.exceptions.Timeout:
+        return "Error: Request timeout - please try again"
+    except requests.exceptions.ConnectionError:
+        return "Error: Cannot connect to AI service - please check your connection"
     except Exception as e:
         return f"Error: {str(e)}"
     

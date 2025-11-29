@@ -19,3 +19,5 @@ logs/
 
 # Ignore specific sensitive files
 config.ini
+
+.env

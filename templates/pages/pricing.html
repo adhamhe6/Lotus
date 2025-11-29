@@ -1,0 +1,396 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="page-container">
+    <!-- Hero Section -->
+    <section class="pricing-hero">
+        <div class="hero-background">
+            <div class="hero-overlay"></div>
+        </div>
+        <div class="hero-content">
+            <h1 data-en="Pricing Plans" data-ar="خطط الأسعار">Pricing Plans</h1>
+            <p data-en="Choose the perfect plan for your research needs" 
+               data-ar="اختر الخطة المثالية لاحتياجاتك البحثية">
+               Choose the perfect plan for your research needs
+            </p>
+        </div>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="content-section">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag" data-en="Pricing" data-ar="التسعير">Pricing</span>
+                <h2 data-en="Simple, Transparent Pricing" data-ar="أسعار بسيطة وشفافة">Simple, Transparent Pricing</h2>
+                <p data-en="No hidden fees. No surprise charges. Just straightforward pricing that scales with your research requirements."
+                   data-ar="لا توجد رسوم خفية. لا توجد رسوم مفاجئة. مجرد تسعير مباشر يتناسب مع متطلباتك البحثية.">
+                   Straightforward pricing that scales with your research requirements
+                </p>
+            </div>
+        </div>
+
+        <div class="pricing-grid">
+            <!-- Basic Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 data-en="Starter" data-ar="المبتدئ">Starter</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">49</span>
+                        <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                    </div>
+                    <p data-en="Perfect for individual researchers" data-ar="مثالي للباحثين الأفراد">Perfect for individual researchers</p>
+                </div>
+                <ul class="features-list">
+                    <li data-en="Up to 5 projects" data-ar="حتى 5 مشاريع">Up to 5 projects</li>
+                    <li data-en="Basic analysis tools" data-ar="أدوات التحليل الأساسية">Basic analysis tools</li>
+                    <li data-en="500 documents per month" data-ar="500 وثيقة شهريًا">500 documents per month</li>
+                    <li data-en="Email support" data-ar="دعم عبر البريد الإلكتروني">Email support</li>
+                </ul>
+                <a href="{% url 'contact' %}" class="pricing-btn" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+            </div>
+
+            <!-- Professional Plan -->
+            <div class="pricing-card featured">
+                <div class="popular-badge" data-en="Most Popular" data-ar="الأكثر شعبية">Most Popular</div>
+                <div class="pricing-header">
+                    <h3 data-en="Professional" data-ar="المحترف">Professional</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">99</span>
+                        <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                    </div>
+                    <p data-en="Ideal for research teams" data-ar="مثالي لفرق البحث">Ideal for research teams</p>
+                </div>
+                <ul class="features-list">
+                    <li data-en="Up to 20 projects" data-ar="حتى 20 مشروع">Up to 20 projects</li>
+                    <li data-en="Advanced analysis tools" data-ar="أدوات التحليل المتقدمة">Advanced analysis tools</li>
+                    <li data-en="2000 documents per month" data-ar="2000 وثيقة شهريًا">2000 documents per month</li>
+                    <li data-en="Priority support" data-ar="دعم ذو أولوية">Priority support</li>
+                    <li data-en="Team collaboration" data-ar="التعاون ضمن الفريق">Team collaboration</li>
+                </ul>
+                <a href="{% url 'contact' %}" class="pricing-btn primary" data-en="Get Started" data-ar="ابدأ الآن">Get Started</a>
+            </div>
+
+            <!-- Enterprise Plan -->
+            <div class="pricing-card">
+                <div class="pricing-header">
+                    <h3 data-en="Enterprise" data-ar="المؤسسات">Enterprise</h3>
+                    <div class="price">
+                        <span class="currency">$</span>
+                        <span class="amount">299</span>
+                        <span class="period" data-en="/month" data-ar="/شهر">/month</span>
+                    </div>
+                    <p data-en="For large organizations" data-ar="للمؤسسات الكبيرة">For large organizations</p>
+                </div>
+                <ul class="features-list">
+                    <li data-en="Unlimited projects" data-ar="مشاريع غير محدودة">Unlimited projects</li>
+                    <li data-en="All premium features" data-ar="جميع الميزات المميزة">All premium features</li>
+                    <li data-en="Unlimited documents" data-ar="وثائق غير محدودة">Unlimited documents</li>
+                    <li data-en="Dedicated support" data-ar="دعم مخصص">Dedicated support</li>
+                    <li data-en="Custom integrations" data-ar="تكاملات مخصصة">Custom integrations</li>
+                    <li data-en="SLA guarantee" data-ar="ضمان اتفاقية مستوى الخدمة">SLA guarantee</li>
+                </ul>
+                <a href="{% url 'contact' %}" class="pricing-btn" data-en="Contact Sales" data-ar="اتصل بالمبيعات">Contact Sales</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="content-section bg-light">
+        <div class="section-container">
+            <div class="section-text">
+                <span class="section-tag" data-en="FAQ" data-ar="الأسئلة الشائعة">FAQ</span>
+                <h2 data-en="Frequently Asked Questions" data-ar="الأسئلة المتكررة">Frequently Asked Questions</h2>
+                
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-en="Can I change plans later?" data-ar="هل يمكنني تغيير الخطط لاحقًا؟">Can I change plans later?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-en="Yes, you can upgrade or downgrade your plan at any time. Changes take effect immediately."
+                               data-ar="نعم، يمكنك ترقية أو خفض خطتك في أي وقت. التغييرات سارية المفعول فورًا.">
+                               Yes, you can change plans at any time
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div class="faq-item">
+                        <button class="faq-question">
+                            <span data-en="Is there a free trial?" data-ar="هل هناك نسخة تجريبية مجانية؟">Is there a free trial?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="faq-answer">
+                            <p data-en="We offer a 14-day free trial for all plans with full access to all features."
+                               data-ar="نحن نقدم نسخة تجريبية مجانية لمدة 14 يومًا لجميع الخطط مع الوصول الكامل إلى جميع الميزات.">
+                               14-day free trial for all plans
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+<style>
+.pricing-hero {
+    position: relative;
+    height: 40vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    color: white;
+    overflow: hidden;
+}
+
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--primary) 0%, #1a3d5a 100%);
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("{% static 'img/lotus-pattern.png' %}") center/cover;
+    opacity: 0.1;
+}
+
+.hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+    padding: 0 2rem;
+}
+
+.hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    max-width: 1200px;
+    margin: 3rem auto 0;
+    padding: 0 2rem;
+}
+
+.pricing-card {
+    background: white;
+    padding: 2.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    position: relative;
+    transition: transform 0.3s ease;
+}
+
+.pricing-card.featured {
+    transform: scale(1.05);
+    border: 2px solid var(--accent);
+}
+
+.pricing-card:hover {
+    transform: translateY(-5px);
+}
+
+.pricing-card.featured:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--accent);
+    color: white;
+    padding: 0.5rem 1.5rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.pricing-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid #e1e5e9;
+}
+
+.pricing-header h3 {
+    color: var(--primary);
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.price {
+    display: flex;
+    align-items: baseline;
+    justify-content: center;
+    gap: 0.25rem;
+    margin-bottom: 0.5rem;
+}
+
+.currency {
+    font-size: 1.5rem;
+    color: var(--primary);
+}
+
+.amount {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.period {
+    color: #666;
+    font-size: 1rem;
+}
+
+.features-list {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 2rem;
+}
+
+.features-list li {
+    padding: 0.75rem 0;
+    color: #555;
+    position: relative;
+    padding-left: 1.5rem;
+}
+
+.features-list li:before {
+    content: '✓';
+    color: var(--accent);
+    font-weight: bold;
+    position: absolute;
+    left: 0;
+}
+
+.pricing-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem 2rem;
+    text-align: center;
+    background: var(--primary);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border: 2px solid var(--primary);
+}
+
+.pricing-btn:hover {
+    background: white;
+    color: var(--primary);
+}
+
+.pricing-btn.primary {
+    background: var(--accent);
+    border-color: var(--accent);
+}
+
+.pricing-btn.primary:hover {
+    background: white;
+    color: var(--accent);
+}
+
+/* RTL Support */
+body.rtl .features-list li {
+    padding-left: 0;
+    padding-right: 1.5rem;
+}
+
+body.rtl .features-list li:before {
+    left: auto;
+    right: 0;
+}
+
+body.rtl .pricing-header,
+body.rtl .section-text {
+    text-align: right;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .pricing-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .pricing-card.featured {
+        transform: none;
+    }
+    
+    .pricing-card.featured:hover {
+        transform: translateY(-5px);
+    }
+}
+</style>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Language switching functionality
+    function updateLanguage() {
+        const isRTL = document.body.classList.contains('rtl');
+        const elements = document.querySelectorAll('[data-en][data-ar]');
+        
+        elements.forEach(element => {
+            if (isRTL) {
+                element.textContent = element.getAttribute('data-ar');
+            } else {
+                element.textContent = element.getAttribute('data-en');
+            }
+        });
+    }
+
+    // FAQ functionality
+    const faqQuestions = document.querySelectorAll('.faq-question');
+    
+    faqQuestions.forEach(question => {
+        question.addEventListener('click', function() {
+            const faqItem = this.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        });
+    });
+
+    // Initial language update
+    updateLanguage();
+
+    // Listen for language changes
+    const languageToggle = document.getElementById('language-toggle');
+    if (languageToggle) {
+        languageToggle.addEventListener('click', function() {
+            setTimeout(updateLanguage, 100);
+        });
+    }
+});
+</script>
+{% endblock %}
